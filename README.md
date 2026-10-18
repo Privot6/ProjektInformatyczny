@@ -1,7 +1,9 @@
 # AeroRun – Analityczny asystent wyboru okna treningowego na podstawie danych smogowych (GIOŚ) i meteorologicznych (Open-Meteo)
 
 **Specjalność:** Analiza Danych Społeczno-gospodarczych
+
 **Zespół:** Dawid Jopek, Kornel Łazowski, Maksym Łazowski, Kacper Dąbek 
+
 **Data opracowania:** 18.10.2026 r.
 
 ---
