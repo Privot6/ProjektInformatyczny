@@ -40,4 +40,15 @@ Osoby trenujące na zewnątrz (biegacze, rowerzyści) w polskich miastach w sezo
 ## Struktura repozytorium i dokumentacja
 
 * 📄 [Analiza problemu i wymagania (`docs/problem.md`)](./docs/problem.md)
-* 📊 [Analiza źródeł danych i pomysł realizacji (`docs/data.md`)](./docs
+* 📊 [Analiza źródeł danych i pomysł realizacji (`docs/data.md`)](./docs/data.md)
+* 📁 [Próbka danych z API GIOŚ i Open-Meteo (`data/sample.json`)](./data/sample.json)
+
+```text
+projekt-zespolu/
+├── data/
+│   └── sample.json
+├── docs/
+│   ├── problem.md
+│   └── data.md
+└── README.md
+```
