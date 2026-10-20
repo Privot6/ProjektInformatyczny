@@ -26,16 +26,6 @@ Osoby trenujące na zewnątrz (biegacze, rowerzyści) w polskich miastach w sezo
 
 ---
 
-## Zespół projektowy i podział zadań
-
-| Członek zespołu (GitHub) | Zakres odpowiedzialności | Mierzalny rezultat |
-| :--- | :--- | :--- |
-| `@login_osoba_1` | Pozyskiwanie i obsługa danych środowiskowych (API GIOŚ) | Moduł w Pythonie pobierający listę stacji oraz pomiary PM10/PM2.5 i zapisujący próbkę JSON (min. 48 rekordów godzinowych) |
-| `@login_osoba_2` | Pozyskiwanie danych meteorologicznych (API Open-Meteo) i integracja zbiorów | Skrypt łączący dane pogodowe ze smogowymi w ramkę Pandas (`DataFrame`) z ujednoliceniem czasu (`Europe/Warsaw`) i czyszczeniem braków (`dropna`/interpolacja) |
-| `@login_osoba_3` | Moduł analityczno-ekonometryczny i algorytm rekomendacji | Kod wyliczający korelację Pearsona, model regresji liniowej oraz reguły decyzyjne indeksu treningowego |
-| `@login_osoba_4` | Interfejs użytkownika (Streamlit) i dokumentacja danych (`docs/data.md`) | Dashboard z wykresami i komunikatem decyzyjnym oraz opracowanie dokumentacji źródeł danych |
-
----
 
 ## Struktura repozytorium i dokumentacja
 
