@@ -1,0 +1,19 @@
+{
+  "input": "data/processed/aerorun_dane.csv",
+  "sha256": "d970feba7516b3bb3005ab982b9fcc52bef1510719d17ff919eefb5a18bfe21a",
+  "n": 72,
+  "first": "2026-10-20T00:00:00+02:00",
+  "last": "2026-10-22T23:00:00+02:00",
+  "continuous_hourly_utc": true,
+  "duplicates": 0,
+  "missing": 0,
+  "units": {
+    "pm25": "ug/m3",
+    "pm10": "ug/m3",
+    "temperature_2m": "C",
+    "wind_speed_10m": "km/h",
+    "precipitation": "mm/h (hourly accumulation)"
+  },
+  "data_kind": "synthetic (repository Lab 3 fixture)",
+  "input_changes": "none; no sorting, imputation or resampling"
+}

@@ -1,0 +1,21 @@
+{
+  "input_sha256": "d970feba7516b3bb3005ab982b9fcc52bef1510719d17ff919eefb5a18bfe21a",
+  "lab3_rows_reproduced": 72,
+  "lab3_semantically_identical": true,
+  "lab4_byte_identical_runs": 2,
+  "output_sha256": {
+    "comparison.csv": "b4de1f2be49e5ea3f538f0ba8307479c11d4d9a250c24276bce01f95f8572473",
+    "control_checks.csv": "1e2e2f0810050ad256d2ee86c8089e11328d7a4e31be1f929cd22ef5189b2fa7",
+    "observations.csv": "f989569838c69d32d397874d79a9caf71f7d5f2eacab262e3191fb7213a3ff7a",
+    "run.json": "62c59dae340ac9fac23edda9875bf2644d28f6c8e06b4605a04169fc18f6ebf5",
+    "sensitivity/comparison.csv": "870fa74993c0b3d8c5657a77829bc5e8a7cdf479536c8ce320b005ef55c3499d",
+    "sensitivity/control_checks.csv": "707954fc19edc3a320e20fb735f8cef98bed39028cb63c11e4d8aa56dc379ee2",
+    "sensitivity/observations.csv": "764998ea1d0717b2260af84b868496ec783b47346c1c43ec3e08b1a7da1d537c",
+    "sensitivity/run.json": "680332f9363f80c48ab6a5b38bf6d5c9c3f88502d27e5c24e14a188537770ba6"
+  },
+  "input_unchanged": true,
+  "raw_sha256": {
+    "gios_syntetyczne.csv": "38514ebf17c101bd375af96c60e12264268d5fb831c5f78c27a8d2354e1084e1",
+    "open_meteo_syntetyczne.csv": "6ee273ac2535dacadb690af1dc457617150e42bd6572f77db84b4d8ce560a6a8"
+  }
+}
