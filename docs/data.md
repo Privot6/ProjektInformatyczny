@@ -17,3 +17,16 @@
 Próbki `gios_syntetyczne.csv` i `open_meteo_syntetyczne.csv` są **sztucznie wygenerowane**. Nie odnotowano rzeczywistej daty pobrania z API, bo żądania sieciowego nie wykonano. Skrypt zapisuje datę pobrania i pełny URL do `open_meteo_odpowiedz_api.json` przy rzeczywistym pobraniu.
 
 Współrzędne są domyślne dla przykładu, nie oznaczają potwierdzonego położenia stacji GIOŚ. Przy pracy z danymi Dawida należy je dopasować do jego stacji.
+
+
+## Lab 4 Dane dla wnioskowania rozmytego
+
+Eksperyment korzysta z niezmienionego data/processed/aerorun_dane.csv: 72 godziny
+syntetyczne z Lab 3. Nie pobiera nowych pomiarów. Walidatory PM i pogody zapisują
+odrębne raporty jakości i SHA-256. Definicje pól pozostają w data-dictionary.md,
+a kontrakt wejścia w lab4_data.md i lab4_air.md.
+
+PM2.5/PM10, temperatura, wiatr i opad są oceniane dla tej samej godziny.
+Wynik nie jest prognozą ani oceną bezpieczeństwa medycznego. Parametry indeksu
+to jawne założenia demonstracji w config/lab4.json. Pełny protokół, literatura,
+wyniki porównania i ograniczenia są w experiment.md.

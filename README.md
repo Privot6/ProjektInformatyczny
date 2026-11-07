@@ -32,7 +32,7 @@ Osoby trenujące na zewnątrz (biegacze, rowerzyści) w polskich miastach w sezo
 * 📄 [Analiza problemu i wymagania (`docs/problem.md`)](./docs/problem.md)
 * 📊 [Analiza źródeł danych i pomysł realizacji (`docs/data.md`)](./docs/data.md)
 * 📁 [Próbka danych z API GIOŚ i Open-Meteo (`data/sample.json`)](./data/sample.json)
-  
+
 
 ```text
 projekt-zespolu/
@@ -69,3 +69,58 @@ Zapisuje niezmienioną odpowiedź HTTP w JSON i tabelę CSV. Skrypt żąda danyc
 **Test błędnych danych:** `python scripts/prepare_data.py --weather data/test/open_meteo_bledne.csv --output data/test/wynik_bledny` powinien zakończyć się błędem i nie zapisać wyniku.
 
 Dokumentacja: `docs/data.md`, `docs/data-dictionary.md`, `docs/processing.md`.
+
+
+# AeroRun — Laboratorium 4
+
+Porównanie reguł progowych z wnioskowaniem rozmytym Mamdaniego na niezmienionej
+próbce Lab 3. Dotyczy R5 i stabilności indeksu, bez oceny skuteczności zdrowotnej.
+
+## Środowisko
+
+Python 3.10+; polecenia z katalogu głównego projektu, Windows PowerShell.
+Utworzenie .venv jest potrzebne tylko wtedy, gdy środowisko jeszcze nie istnieje:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -c "import sys; print(sys.executable)"
+python -m pip install -r requirements-lab4.txt
+```
+
+Jeśli polityka PowerShell blokuje aktywację, wywoływać bezpośrednio
+`.\.venv\Scripts\python.exe` zamiast `python`. Nie instalować systemowo.
+`requirements-lab4-lock.txt` zapisuje dokładne wersje sprawdzonego środowiska
+Windows/Python 3.13; na tej platformie można zamiast zakresów zainstalować ten plik.
+Na innych platformach użyć requirements-lab4.txt i zapisać własne wersje.
+Środowiska `.venv/` nie dodawać do Git.
+
+## Odtworzenie eksperymentu
+
+Wejście: istniejący `data/processed/aerorun_dane.csv`, 72 syntetyczne godziny.
+Zachować ten plik bez zmian. Przygotowanie z Lab 3 można odtworzyć do osobnego
+katalogu: `python scripts/prepare_data.py --output results/lab3_reproduced`.
+
+```powershell
+python scripts/audit_pm_lab4.py
+python scripts/audit_inputs_lab4.py
+python examples/lab4/fuzzy_demo.py
+python scripts/compare_methods.py
+python scripts/verify_pm_results.py
+python scripts/reproduce_lab4.py
+python -m unittest discover -s tests -v
+python -m streamlit run app_lab4.py
+```
+
+Konfiguracja: `config/lab4.json`. Oba warianty oceniają te same godziny i ten sam
+przyrost +1 µg/m³ PM2.5. Próba wrażliwości zmienia wyłącznie pm25_scale z 25 na 30
+u obu metod. Skrypt generuje oba scenariusze jednym poleceniem. Nie ma losowania.
+Progi są założeniami demonstracyjnymi, bez przypisywania ich normom WHO/GIOŚ.
+
+Wyniki: `results/lab4/comparison.csv`, `observations.csv`, `control_checks.csv`,
+`run.json`, audyty oraz osobny podkatalog `sensitivity/`. Miara podstawowa to średnia
+bezwzględna zmiana indeksu w punktach; nie jest to MAE prognozy ani trafność etykiet.
+Tryb jawny: `python scripts/compare_methods.py --input data/processed/aerorun_dane.csv --config config/lab4.json --output results/lab4`.
+
+Dokumentacja: `docs/experiment.md`, `docs/lab4_model.md`, `docs/lab4_air.md`
+i `docs/lab4_data.md`.

@@ -1,0 +1,6 @@
+-r requirements.txt
+numpy>=1.26,<3
+scipy>=1.14,<2
+scikit-fuzzy==0.5.0
+networkx>=3,<4
+streamlit>=1.40,<2
