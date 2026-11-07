@@ -1,0 +1,14 @@
+flowchart LR
+    G["GIOS: godzinowe PM2.5 i PM10"] -->|"JSON, CET i metadane"| R["Zapisane odpowiedzi i provenance.json"]
+    O["Open-Meteo: reanaliza ERA5"] -->|"JSON, UTC i jednostki"| R
+    R -->|"gios_pomiary.csv i open_meteo_pogoda.csv"| P["Lab 3: czas, kontrola i integracja"]
+    P -->|"aerorun_dane.csv, 1 wiersz na godzine"| V["Lab 4: walidacja danych i konfiguracji"]
+    K["config/lab4.json"] --> V
+    V -->|"lista poprawnych godzin i parametry"| A["Reguly progowe i Mamdani"]
+    A -->|"obserwacje, porownanie, kontrole"| S["Planowany RunStore: niezmienny run_id"]
+    R -->|"wersja zrodla i czas pobrania"| S
+    S -->|"RunView, manifest i hasze"| D["Dashboard: scenariusz i dzien"]
+    D -->|"indeks 0-100, etykieta, godziny i daty"| U["Uzytkownik"]
+    V -->|"blad danych"| E["Komunikat bez nowego wyniku"]
+    A -->|"blad obliczen"| E
+    S -->|"blad zapisu lub odczytu"| E
