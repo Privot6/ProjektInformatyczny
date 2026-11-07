@@ -1,0 +1,51 @@
+sequenceDiagram
+    actor U as Uzytkownik lokalny
+    participant C as CLI compare_methods
+    participant V as Walidacja Lab 3 i 4
+    participant A as Model i porownanie
+    participant S as RunStore planowany
+    participant F as Pliki lokalne
+    participant D as Dashboard Streamlit
+    U->>C: Plik godzinowy i konfiguracja
+    C->>V: load_data oraz load_config
+    V->>F: Odczyt CSV i JSON
+    F-->>V: Dane i parametry
+    alt Brak pliku lub niepoprawne dane
+        V-->>C: OSError lub ValueError
+        C-->>U: Blad bez nowego przebiegu
+    else Dane poprawne
+        V-->>C: Wspolne godziny i konfiguracja
+        C->>A: Oba warianty i ta sama perturbacja PM2.5
+        loop Kazda godzina i oba scenariusze
+            A->>A: baseline oraz FuzzyModel.evaluate
+        end
+        alt Blad obliczen
+            A-->>C: Wyjatek bez publikacji
+            C-->>U: Blad bez nowego przebiegu
+        else Wyniki poprawne
+            A-->>C: Obserwacje i porownanie
+            C->>S: publish dane, parametry i komplet wynikow
+            S->>F: Nowy katalog tymczasowy i zapis
+            alt Blad zapisu albo kolizja identyfikatora
+                F-->>S: OSError lub FileExistsError
+                S-->>C: Brak opublikowanego przebiegu
+                C-->>U: Blad bez potwierdzenia zapisu
+            else Zapis i kontrola kompletnosci poprawne
+                S->>F: Manifest i atomowe opublikowanie katalogu
+                F-->>S: Gotowy katalog run_id
+                S-->>C: RunRef
+                C-->>U: Identyfikator zapisanego przebiegu
+                U->>D: Wybor przebiegu, scenariusza i dnia
+                D->>S: load_run run_id
+                S->>F: Odczyt manifestu i kontrola haszy
+                alt Brak, uszkodzenie lub niezgodna wersja
+                    S-->>D: Blad odczytu
+                    D-->>U: Komunikat bez rekomendacji
+                else Spojny zapis
+                    S-->>D: RunView z pomiarami i wynikami
+                    D->>D: Filtr dnia i ranking godzin
+                    D-->>U: Indeks, etykiety, godziny i pochodzenie danych
+                end
+            end
+        end
+    end
