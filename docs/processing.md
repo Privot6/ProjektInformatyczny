@@ -23,10 +23,19 @@
 5. Negatywny test `data/test/open_meteo_bledne.csv`: powtórzony timestamp i ujemny wiatr; oczekiwany błąd o duplikacie i brak pliku wynikowego.
 
 ## Ograniczenia i decyzje
-- Próbki są **syntetyczne**; nie wyciągać wniosków o faktycznej jakości powietrza ani pogodzie.
-- Wartości GIOŚ w próbce nie są danymi rzeczywistymi od Dawida. Prawdziwa integracja wymaga dopasowania stacji i okresu.
+- Pomiary PM są rzeczywistymi danymi GIOŚ; pogoda jest reanalizą ERA5 Open-Meteo, nie pomiarem punktowym.
+- Stacja: Rzeszów, al. Piłsudskiego, 10125. Okres: 20–22 października 2026. Źródła i parametry: data/raw/provenance.json.
 - Prognoza temperatury/wiatru nie jest prognozą PM. Nie interpolujemy długich braków, bo mogłoby to zniekształcić analizę.
 - Przy jesiennej zmianie czasu lokalne znaczniki API bez offsetu mogą być niejednoznaczne. W rzeczywistej integracji preferować UTC lub dane z jednoznacznym offsetem.
 - Decyzja: odrzucać nieprawidłowe wartości fizyczne i duplikaty pogody zamiast arbitralnie wybierać rekord.
 
 Wyniki liczebności i testów są wypisywane po uruchomieniu `python scripts/prepare_data.py` i `python -m unittest discover -s tests -v`.
+
+
+## Wynik kontroli zapisanej próbki
+
+Wejście: 72 pomiary PM2.5 i 72 pomiary PM10 oraz 72 wspólne godziny pogody.
+Archiwalny czas GIOŚ CET przeliczono do Europe/Warsaw; czas Open-Meteo z UTC
+do Europe/Warsaw. Po integracji: 72 godziny, zero braków i duplikatów, poprawne
+jednostki i zakresy. Nie było potrzeby interpolacji. Surowe odpowiedzi JSON
+pozostawiono bez zmian. Źródła, czas pobrania i hashe są w data/raw/provenance.json.
