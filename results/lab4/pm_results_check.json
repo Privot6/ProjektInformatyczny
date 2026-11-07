@@ -1,0 +1,14 @@
+[
+  {
+    "scenario": "lab4",
+    "observations_checked": 144,
+    "control_checks": 4,
+    "result": "PASS"
+  },
+  {
+    "scenario": "sensitivity",
+    "observations_checked": 144,
+    "control_checks": 4,
+    "result": "PASS"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "input": "data/processed/aerorun_dane.csv",
+  "sha256": "5ec587041d6f63073b7e287f5980e78b9d4a395ecde75cafd4843c1727380f71",
+  "n": 72,
+  "first": "2026-10-20T00:00:00+02:00",
+  "last": "2026-10-22T23:00:00+02:00",
+  "continuous_hourly_utc": true,
+  "duplicates": 0,
+  "missing": 0,
+  "units": {
+    "pm25": "ug/m3",
+    "pm10": "ug/m3",
+    "temperature_2m": "C",
+    "wind_speed_10m": "km/h",
+    "precipitation": "mm/h (hourly accumulation)"
+  },
+  "data_kind": "GIOS measurements and Open-Meteo ERA5 reanalysis",
+  "input_changes": "none; no sorting, imputation or resampling"
+}

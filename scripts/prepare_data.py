@@ -46,8 +46,8 @@ def prepare(gios_path, weather_path, output_dir):
 
 if __name__ == '__main__':
     p=argparse.ArgumentParser()
-    p.add_argument('--gios',default='data/raw/gios_syntetyczne.csv')
-    p.add_argument('--weather',default='data/raw/open_meteo_syntetyczne.csv')
+    p.add_argument('--gios',default='data/raw/gios_pomiary.csv')
+    p.add_argument('--weather',default='data/raw/open_meteo_pogoda.csv')
     p.add_argument('--output',default='data/processed')
     a=p.parse_args()
     prepare(a.gios,a.weather,a.output)

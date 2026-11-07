@@ -1,0 +1,128 @@
+{
+  "station": {
+    "Identyfikator stacji": 10125,
+    "Kod stacji": "PkRzeszPilsu",
+    "Nazwa stacji": "Rzeszów, Al. Piłsudskiego",
+    "WGS84 φ N": "50.040675",
+    "WGS84 λ E": "22.004656",
+    "Identyfikator miasta": 810,
+    "Nazwa miasta": "Rzeszów",
+    "Gmina": "Rzeszów",
+    "Powiat": "Rzeszów",
+    "Województwo": "PODKARPACKIE",
+    "Ulica": "Al. Piłsudskiego"
+  },
+  "sensor_ids": {
+    "pm25": 20277,
+    "pm10": 16344
+  },
+  "source_kind": {
+    "pm": "GIOS hourly monitoring measurements",
+    "weather": "Open-Meteo ERA5 reanalysis, not a weather-station observation"
+  },
+  "requested_coordinates": {
+    "latitude": 50.040675,
+    "longitude": 22.004656
+  },
+  "weather_grid_coordinates": {
+    "latitude": 50.0,
+    "longitude": 22.0
+  },
+  "selected_start": "2026-10-20T00:00:00+02:00",
+  "selected_end": "2026-10-22T23:00:00+02:00",
+  "n": 72,
+  "time_conversion": {
+    "gios_archive": "Fixed CET (UTC+01:00) -> Europe/Warsaw",
+    "open_meteo": "UTC -> Europe/Warsaw"
+  },
+  "sources": {
+    "gios_stacje.json": {
+      "url": "https://api.gios.gov.pl/pjp-api/v1/rest/station/findAll?size=500",
+      "saved_at_utc": "2026-11-07T17:48:45.114314+00:00",
+      "sha256": "ab82a3cc789592a8297d563ade77a6ecc838cfb6c06938428030cfd8774a4fd4"
+    },
+    "gios_stanowiska.json": {
+      "retrieved_at_utc": "2026-11-07T17:49:45.436686+00:00",
+      "url": "https://api.gios.gov.pl/pjp-api/v1/rest/station/sensors/10125?size=500",
+      "sha256": "7a94a4fa4b84b34175fc6d3c2776cf77317588e75192a3672ee885dd8c832eb4"
+    },
+    "gios_pm25.json": {
+      "retrieved_at_utc": "2026-11-07T17:50:35.834337+00:00",
+      "url": "https://api.gios.gov.pl/pjp-api/v1/rest/archivalData/getDataBySensor/20277?dateFrom=2026-10-19+23%3A00&dateTo=2026-10-22+22%3A00&size=500",
+      "headers": {
+        "Cache-Control": "max-age=30, public",
+        "Access-Control-Allow-Origin": "powietrze.gios.gov.pl",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "Strict-Transport-Security": "max-age=31536000 ; includeSubDomains",
+        "X-Frame-Options": "DENY",
+        "Content-Type": "application/ld+json;charset=utf-8",
+        "Content-Length": "11980",
+        "Date": "Sat, 07 Nov 2026 17:49:24 GMT",
+        "Connection": "close",
+        "Set-Cookie": "SERVERID=9983a6401c537cc0eedd7d80a464ef6a;max-age=300;Path=/;HttpOnly"
+      },
+      "sha256": "ccdfbe25844b34b093b18b6f05167e639ea99cd53e31f5d39f298c41962de930"
+    },
+    "gios_pm10.json": {
+      "retrieved_at_utc": "2026-11-07T17:51:20.446145+00:00",
+      "url": "https://api.gios.gov.pl/pjp-api/v1/rest/archivalData/getDataBySensor/16344?dateFrom=2026-10-19+23%3A00&dateTo=2026-10-22+22%3A00&size=500",
+      "headers": {
+        "Cache-Control": "max-age=30, public",
+        "Access-Control-Allow-Origin": "powietrze.gios.gov.pl",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "0",
+        "Strict-Transport-Security": "max-age=31536000 ; includeSubDomains",
+        "X-Frame-Options": "DENY",
+        "Content-Type": "application/ld+json;charset=utf-8",
+        "Content-Length": "11919",
+        "Date": "Sat, 07 Nov 2026 17:50:08 GMT",
+        "Connection": "close",
+        "Set-Cookie": "SERVERID=6eacdc246b609fcbeedd7d80d064ef6a;max-age=300;Path=/;HttpOnly"
+      },
+      "sha256": "5029ffae4862fdfc69277123f993b9cfd97452f73b918893049f108b2669b548"
+    },
+    "open_meteo_archiwum.json": {
+      "retrieved_at_utc": "2026-11-07T17:50:47.803049+00:00",
+      "url": "https://archive-api.open-meteo.com/v1/archive?latitude=50.040675&longitude=22.004656&start_date=2026-10-19&end_date=2026-10-22&hourly=temperature_2m%2Cwind_speed_10m%2Cprecipitation&timezone=UTC&wind_speed_unit=kmh&temperature_unit=celsius&precipitation_unit=mm&models=era5",
+      "params": {
+        "latitude": 50.040675,
+        "longitude": 22.004656,
+        "start_date": "2026-10-19",
+        "end_date": "2026-10-22",
+        "hourly": "temperature_2m,wind_speed_10m,precipitation",
+        "timezone": "UTC",
+        "wind_speed_unit": "kmh",
+        "temperature_unit": "celsius",
+        "precipitation_unit": "mm",
+        "models": "era5"
+      },
+      "headers": {
+        "Date": "Sat, 07 Nov 2026 17:49:36 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "X-RateLimit-Cost": "1.0",
+        "X-RateLimit-Limit": "600.0",
+        "X-RateLimit-Remaining": "599.0",
+        "X-RateLimit-Reset": "1794073836",
+        "X-RateLimit-Window": "60"
+      },
+      "sha256": "a6fa0dd2aec0c32d60e922a84f14a4b6c92d8f6c2e6af175486f13b289b1968d"
+    }
+  },
+  "normalized_csv_sha256": {
+    "gios_pomiary.csv": "8bd465367fcdbd80ef70404563f06afd85e183c14c66ccccaa1450c33d7188c0",
+    "open_meteo_pogoda.csv": "9d0b5b3d409f781514063c150deee1a6c07baaa5126ac4cb3d78f10507576e72"
+  },
+  "attribution": {
+    "gios": "Glowny Inspektorat Ochrony Srodowiska, Panstwowy Monitoring Srodowiska, https://powietrze.gios.gov.pl",
+    "weather": "Open-Meteo.com, ERA5/Copernicus Climate Change Service (C3S), CC BY 4.0"
+  },
+  "source_documentation": [
+    "https://powietrze.gios.gov.pl/pjp/content/api",
+    "https://open-meteo.com/en/docs/historical-weather-api"
+  ],
+  "missing_values": 0,
+  "imputation": "none; source values preserved"
+}

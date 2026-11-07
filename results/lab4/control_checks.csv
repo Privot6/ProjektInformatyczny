@@ -1,0 +1,5 @@
+case,wariant,pm25,pm10,temperature_2m,wind_speed_10m,precipitation,score,label,pass_no_train,r_bad,r_middle,r_good
+high_pm25,bazowy,50.0,0.0,15.0,5.0,0.0,10.0,ZOSTAŃ W DOMU,1,,,
+high_pm25,rozmyty,50.0,0.0,15.0,5.0,0.0,9.999999999999998,ZOSTAŃ W DOMU,1,1.0,0.0,0.0
+high_pm10,bazowy,0.0,100.0,15.0,5.0,0.0,10.0,ZOSTAŃ W DOMU,1,,,
+high_pm10,rozmyty,0.0,100.0,15.0,5.0,0.0,9.999999999999998,ZOSTAŃ W DOMU,1,1.0,0.0,0.0
