@@ -58,15 +58,6 @@ Plik [data/raw/sample.json](../data/raw/sample.json) zawiera metadane pobrania i
 | Osoba odpowiedzialna za pozyskanie | W dotychczasowej historii Git `@Privot6` opracował źródła i zapisał próbkę Lab 2 (`ef0e925`, `d557121`), a `@kacperd02` przygotował pobieranie pogody (`039fa58`). Proponowany podział ponownego pozyskania to PM10 dla `@Privot6` i Open-Meteo dla `@kacperd02`. |
 | Plan awaryjny | Przy niedostępnym API użyć zapisanej próbki z widoczną datą jej pobrania. Brakujące prognozy zostają jawnie oznaczone w wyniku. |
 
-## Dane dla wnioskowania rozmytego w Lab 4
+## Dane do eksperymentu Lab 4
 
-Eksperyment korzysta z `data/processed/aerorun_dane.csv`, który zawiera 72 godziny
-pomiarów GIOŚ i reanalizy ERA5 według [metadanych źródłowych](../data/raw/provenance.json).
-Walidatory PM i pogody zapisują
-odrębne raporty jakości i SHA-256. Definicje pól pozostają w data-dictionary.md,
-a kontrakt wejścia w lab4_data.md i lab4_air.md.
-
-PM2.5/PM10, temperatura, wiatr i opad są oceniane dla tej samej godziny.
-Wynik nie jest prognozą ani oceną bezpieczeństwa medycznego. Parametry indeksu
-to jawne założenia demonstracji w config/lab4.json. Pełny protokół, literatura,
-wyniki porównania i ograniczenia są w experiment.md.
+[Próbka Lab 3](../data/processed/sample-clean.json) zawiera prognozę dobową IOŚ-PIB i godzinową pogodę. Dwie kompletne doby wykorzystano do próby zastosowania modeli. Do wyliczenia MAE użyto rozszerzenia z pomiarami z rzeszowskiej stacji GIOŚ i danymi Open-Meteo z okresu 01.09–31.10.2026. Źródła i hashe są zapisane w [metadanych](../data/raw/lab4/sources.json). [Protokół Lab 4](experiment.md) opisuje tworzenie cech, podział czasowy i ograniczenia.

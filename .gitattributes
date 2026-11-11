@@ -1,0 +1,4 @@
+data/raw/lab4/gios.json -text
+data/raw/lab4/weather.json -text
+data/raw/lab4/sources.json text eol=lf
+results/lab4/** text eol=lf

@@ -1,50 +1,162 @@
 {
-  "input_sha256": "5ec587041d6f63073b7e287f5980e78b9d4a395ecde75cafd4843c1727380f71",
-  "config": {
-    "version": "aerorun-lab4-fuzzy-v1",
-    "pm25_scale": 25.0,
-    "pm10_scale": 50.0,
-    "temperature_center": 15.0,
-    "anchors": {
-      "pollution": [
-        0.6,
-        1.0,
-        1.4
-      ],
-      "thermal": [
-        5.0,
-        12.0,
-        20.0
-      ],
-      "wind": [
-        10.0,
-        25.0,
-        40.0
-      ],
-      "rain": [
-        0.0,
-        0.5,
-        2.0
-      ]
+  "lab3_sha256_utf8_lf": "62be7c7abb28c1f8128fc4d9f6decd73d8453a6b3a966194b5470b069df8cc01",
+  "sources": {
+    "gios.json": {
+      "retrieved_at_utc": "2026-11-11T19:03:19.764658+00:00",
+      "sha256": "90cab258f3684bfee358251e400e896c550934c974b1b5d738c69a61dbdac82f",
+      "url": "https://api.gios.gov.pl/pjp-api/v1/rest/archivalData/getDataBySensor/16344?dateFrom=2026-08-31+23%3A00&dateTo=2026-10-31+23%3A00&size=2000"
     },
-    "caps": {
-      "pollution": 10.0,
-      "thermal": 120.0,
-      "wind": 300.0,
-      "rain": 1000.0
-    },
-    "labels": {
-      "stay_below": 35.0,
-      "train_from": 65.0
-    },
-    "perturbation_pm25": 1.0,
-    "sensitivity_pm25_scale": 30.0,
-    "practical_relative_reduction": 0.2,
-    "note": "All numeric thresholds are project demo assumptions, not WHO/GIOS limits or clinical advice."
+    "weather.json": {
+      "retrieved_at_utc": "2026-11-11T19:04:16.938059+00:00",
+      "sha256": "aa9ff9b732591311e2e9ea3b62c56fff3da8143e1f05cbacf5493e3c96f9b3a4",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=50.0413&longitude=21.999&start_date=2026-08-31&end_date=2026-10-31&hourly=temperature_2m,precipitation,wind_speed_10m&timezone=GMT"
+    }
   },
-  "relative_reduction": 0.23998518950756753,
-  "practical_criterion_met": true,
-  "metric_meaning": "stability only, not recommendation accuracy or health safety",
-  "data_kind": "GIOS measurements and Open-Meteo ERA5 reanalysis",
-  "randomness": "none"
+  "training_dates": [
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13",
+    "2026-09-14",
+    "2026-09-15",
+    "2026-09-18",
+    "2026-09-19",
+    "2026-09-20",
+    "2026-09-21",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-24",
+    "2026-09-25",
+    "2026-09-26",
+    "2026-09-27",
+    "2026-09-28",
+    "2026-09-29",
+    "2026-10-01",
+    "2026-10-02",
+    "2026-10-03",
+    "2026-10-04",
+    "2026-10-05",
+    "2026-10-06",
+    "2026-10-07",
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11"
+  ],
+  "test_dates": [
+    "2026-10-12",
+    "2026-10-13",
+    "2026-10-14",
+    "2026-10-15",
+    "2026-10-16",
+    "2026-10-17",
+    "2026-10-18",
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-24",
+    "2026-10-25",
+    "2026-10-27",
+    "2026-10-28",
+    "2026-10-29",
+    "2026-10-30",
+    "2026-10-31"
+  ],
+  "excluded_dates": {
+    "2026-09-01": {
+      "missing_pm10_hours": 3,
+      "missing_weather_hours": 24
+    },
+    "2026-09-02": {
+      "missing_pm10_hours": 9,
+      "missing_weather_hours": 24
+    },
+    "2026-09-03": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 24
+    },
+    "2026-09-04": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 24
+    },
+    "2026-09-05": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 24
+    },
+    "2026-09-06": {
+      "missing_pm10_hours": 1,
+      "missing_weather_hours": 24
+    },
+    "2026-09-07": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 24
+    },
+    "2026-09-08": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 24
+    },
+    "2026-09-09": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 24
+    },
+    "2026-09-10": {
+      "missing_pm10_hours": 0,
+      "missing_weather_hours": 2
+    },
+    "2026-09-16": {
+      "missing_pm10_hours": 13,
+      "missing_weather_hours": 0
+    },
+    "2026-09-17": {
+      "missing_pm10_hours": 11,
+      "missing_weather_hours": 0
+    },
+    "2026-09-30": {
+      "missing_pm10_hours": 1,
+      "missing_weather_hours": 0
+    },
+    "2026-10-26": {
+      "missing_pm10_hours": 1,
+      "missing_weather_hours": 0
+    }
+  },
+  "python": "3.12.14",
+  "scikit_learn": "1.7.2",
+  "tree_fitted_depth": 3,
+  "ridge_intercept_original_units": -0.8421308891371027,
+  "ridge_coefficients_original_units": {
+    "temperature_mean_c": 1.608383706572093,
+    "wind_mean_kmh": 0.11868796313577762,
+    "precipitation_sum_mm": -0.6637154644660066
+  },
+  "pearson_training": {
+    "temperature_mean_c": 0.398788603623254,
+    "wind_mean_kmh": -0.13156539713609677,
+    "precipitation_sum_mm": -0.3907333058715043
+  },
+  "first_test_tree_leaf_training_values": [
+    7.3875,
+    6.966666666666667,
+    7.8625,
+    8.470833333333333,
+    10.4375,
+    18.433333333333334,
+    14.0125
+  ],
+  "first_test_date": "2026-10-12",
+  "ridge": {
+    "alpha": 1.0,
+    "solver": "svd",
+    "scaling": "training only"
+  },
+  "tree": {
+    "max_depth": 3,
+    "criterion": "squared_error",
+    "min_samples_leaf": 5,
+    "random_state": 42
+  },
+  "tree_improvement_ug_m3": -3.057220791635551,
+  "practical_threshold_ug_m3": 1.0,
+  "lower_mae": "ridge"
 }

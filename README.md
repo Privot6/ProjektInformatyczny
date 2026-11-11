@@ -65,59 +65,42 @@ python scripts/prepare_forecast.py --source data/test/forecast-duplicate.json --
 
 [Plan pozyskania](./docs/data.md#plan-pozyskania-danych-w-lab-3), [słownik danych](./docs/data-dictionary.md) i [kontrole oraz odtworzenie wyniku](./docs/processing.md).
 
-Historyczne zestawienie godzinowych pomiarów GIOŚ z reanalizą ERA5 przygotowuje `scripts/prepare_data.py`. Jego wynik `data/processed/aerorun_dane.csv` jest wejściem do eksperymentu Lab 4.
-
+Historyczne zestawienie pomiarów GIOŚ z reanalizą ERA5 można nadal odtworzyć poleceniem `python scripts/prepare_data.py --output results/history_reproduced`.
 
 # AeroRun — Laboratorium 4
 
-Porównanie reguł progowych z wnioskowaniem rozmytym Mamdaniego na historycznym
-zestawie pomiarów i reanalizy. Dotyczy R5 i stabilności indeksu, bez oceny skuteczności zdrowotnej.
+Porównujemy dwie metody uczenia maszynowego dla R4. Ridge i drzewo regresyjne estymują dobową średnią PM10 na podstawie temperatury, wiatru i opadów. Uczenie i ocena używają archiwalnych pomiarów GIOŚ i danych Open-Meteo z Rzeszowa. Na [próbce Lab 3](./data/processed/sample-clean.json) skrypt wykonuje też próbę zastosowania do dwóch kompletnych dób z prognozą IOŚ-PIB.
 
 ## Środowisko
 
-Python 3.10+; polecenia z katalogu głównego projektu, Windows PowerShell.
-Utworzenie .venv jest potrzebne tylko wtedy, gdy środowisko jeszcze nie istnieje:
+Polecenia uruchamiaj w PowerShellu z katalogu głównego projektu. Jeśli nie masz jeszcze `.venv`, utwórz je za pomocą zainstalowanego Pythona 3.12.
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -c "import sys; print(sys.executable)"
-python -m pip install -r requirements-lab4.txt
+py -3.12 -m venv .venv
 ```
 
-Jeśli polityka PowerShell blokuje aktywację, wywoływać bezpośrednio
-`.\.venv\Scripts\python.exe` zamiast `python`. Nie instalować systemowo.
-`requirements-lab4-lock.txt` zapisuje dokładne wersje sprawdzonego środowiska
-Windows/Python 3.13; na tej platformie można zamiast zakresów zainstalować ten plik.
-Na innych platformach użyć requirements-lab4.txt i zapisać własne wersje.
-Środowiska `.venv/` nie dodawać do Git.
-
-## Odtworzenie eksperymentu
-
-Wejście to `data/processed/aerorun_dane.csv`, 72 godziny pomiarów GIOŚ i reanalizy ERA5.
-Przygotowanie historycznego zbioru można odtworzyć do osobnego
-katalogu: `python scripts/prepare_data.py --output results/lab3_reproduced`.
+Jeśli środowisko projektu wymaga instalacji zależności, uruchom:
 
 ```powershell
-python scripts/audit_pm_lab4.py
-python scripts/audit_inputs_lab4.py
-python examples/lab4/fuzzy_demo.py
-python scripts/compare_methods.py
-python scripts/verify_pm_results.py
-python scripts/reproduce_lab4.py
-python -m unittest discover -s tests -v
-python -m streamlit run app_lab4.py
+.\.venv\Scripts\python.exe -m pip install -r requirements-lab4.txt
 ```
 
-Konfiguracja: `config/lab4.json`. Oba warianty oceniają te same godziny i ten sam
-przyrost +1 µg/m³ PM2.5. Próba wrażliwości zmienia wyłącznie pm25_scale z 25 na 30
-u obu metod. Skrypt generuje oba scenariusze jednym poleceniem. Nie ma losowania.
-Progi są założeniami demonstracyjnymi, bez przypisywania ich normom WHO/GIOŚ.
+Jeżeli w `.venv` brakuje pip, najpierw uruchom `.\.venv\Scripts\python.exe -m ensurepip`. Dokładne wersje użyte na Windows z Pythonem 3.12.14 są w `requirements-lab4-lock.txt`.
 
-Wyniki: `results/lab4/comparison.csv`, `observations.csv`, `control_checks.csv`,
-`run.json`, audyty oraz osobny podkatalog `sensitivity/`. Miara podstawowa to średnia
-bezwzględna zmiana indeksu w punktach; nie jest to MAE prognozy ani trafność etykiet.
-Tryb jawny: `python scripts/compare_methods.py --input data/processed/aerorun_dane.csv --config config/lab4.json --output results/lab4`.
+## Uruchomienie i kontrola
 
-Dokumentacja: `docs/experiment.md`, `docs/lab4_model.md`, `docs/lab4_air.md`
-i `docs/lab4_data.md`.
+Polecenia używają interpretera projektu i działają bez aktywowania `.venv`.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/compare_methods.py
+.\.venv\Scripts\python.exe -m unittest discover -s tests -p "test_lab4.py" -v
+.\.venv\Scripts\python.exe scripts/reproduce_lab4.py
+```
+
+Możesz też uruchomić `scripts/compare_methods.py` przyciskiem **Run** w PyCharmie. Domyślne ścieżki danych i wyników są liczone od katalogu projektu, niezależnie od ustawienia **Working directory**.
+
+Źródła, adresy zapytań i sumy kontrolne są w [data/raw/lab4](./data/raw/lab4/sources.json). Skrypt działa na zapisanych plikach. Dopasowuje modele na dniach sprzed 12.10.2026, a oblicza MAE na kompletnych dniach od tej daty do 31.10.2026. W wariancie głównym drzewo ma limit głębokości 3. W próbie wrażliwości limit wynosi 4.
+
+Wyniki obejmują [porównanie MAE](./results/lab4/comparison.csv), [19 ocenianych dni](./results/lab4/observations.csv), [próbę zastosowania na Lab 3](./results/lab4/lab3_application.csv) oraz [parametry i dane pominięte](./results/lab4/run.json). Próba wrażliwości jest w [osobnym katalogu](./results/lab4/sensitivity/comparison.csv). Polecenie odtworzenia porównuje osiem plików bajtowo w tym samym środowisku. Aby zapisać nowe wykonanie obok wyników wzorcowych, użyj `.\.venv\Scripts\python.exe scripts/compare_methods.py --output results/lab4_reproduced`.
+
+[Protokół, literatura, kontrola ręczna i wnioski](./docs/experiment.md).
