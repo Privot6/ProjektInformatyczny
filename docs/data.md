@@ -11,7 +11,6 @@
 | Pobranie | `scripts/pobierz_open_meteo.py`; GET, parametry: `latitude`, `longitude`, `hourly`, `past_days=7`, `forecast_days=1`, `timezone=UTC` (następnie konwersja do Europe/Warsaw) |
 | Limit, koszt, uprawnienia | Publiczny endpoint bez klucza dla zastosowania demonstracyjnego; aktualne limity i zasady komercyjne sprawdzić w regulaminie Open-Meteo |
 | Licencja i publikacja | Warunki Open-Meteo należy potwierdzić przed publikacją danych rzeczywistych; dołączone próbki są syntetyczne |
-| Osoba odpowiedzialna | Kacper Dąbek |
 | Plan awaryjny | Powtarzalna syntetyczna próbka `data/raw/open_meteo_syntetyczne.csv`; brak zależności od sieci w testach |
 
 
