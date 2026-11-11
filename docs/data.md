@@ -1,10 +1,10 @@
-# Plan pozyskania danych — zakres Kacpra
+# Plan pozyskania danych
 
 | Element | Ustalenie |
 |---|---|
-| Źródło | Open-Meteo Forecast API `https://api.open-meteo.com/v1/forecast` |
+| Źródło | Open-Meteo Forecast API `[https://api.open-meteo.com/v1/forecast](https://open-meteo.com/en/docs?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m)` |
 | Właściciel danych | Open-Meteo; dane z modeli meteorologicznych udostępniane przez usługę |
-| Zakres danych | `time`, `temperature_2m`, `wind_speed_10m`, `precipitation`; pomocniczo GIOŚ `pm25`, `pm10` od Dawida |
+| Zakres danych | `time`, `temperature_2m`, `wind_speed_10m`, `precipitation`; pomocniczo GIOŚ `pm25`, `pm10` |
 | Okres i częstotliwość | Godzinowo, 7 dni wstecz + 1 dzień prognozy (parametry żądania) |
 | Jednostka obserwacji | Jedna godzina dla wybranej lokalizacji |
 | Dobór obserwacji i liczebność | Jedna lokalizacja: domyślnie Rzeszów (50.0413, 21.9990); minimum 48 wspólnych godzin z GIOŚ |
@@ -13,10 +13,6 @@
 | Licencja i publikacja | Warunki Open-Meteo należy potwierdzić przed publikacją danych rzeczywistych; dołączone próbki są syntetyczne |
 | Osoba odpowiedzialna | Kacper Dąbek |
 | Plan awaryjny | Powtarzalna syntetyczna próbka `data/raw/open_meteo_syntetyczne.csv`; brak zależności od sieci w testach |
-
-Próbki `gios_syntetyczne.csv` i `open_meteo_syntetyczne.csv` są **sztucznie wygenerowane**. Nie odnotowano rzeczywistej daty pobrania z API, bo żądania sieciowego nie wykonano. Skrypt zapisuje datę pobrania i pełny URL do `open_meteo_odpowiedz_api.json` przy rzeczywistym pobraniu.
-
-Współrzędne są domyślne dla przykładu, nie oznaczają potwierdzonego położenia stacji GIOŚ. Przy pracy z danymi Dawida należy je dopasować do jego stacji.
 
 
 ## Lab 4 Dane dla wnioskowania rozmytego
