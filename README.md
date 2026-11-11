@@ -29,13 +29,14 @@ Osoby trenujące na zewnątrz w Rzeszowie muszą sprawdzać prognozę jakości p
 
 * 📄 [Analiza problemu i wymagania (`docs/problem.md`)](./docs/problem.md)
 * 📊 [Analiza źródeł danych i pomysł realizacji (`docs/data.md`)](./docs/data.md)
-* 📁 [Rzeczywista próbka prognoz PM10 i pogody dla Rzeszowa (`data/sample.json`)](./data/sample.json)
+* 📁 [Rzeczywista próbka prognoz PM10 i pogody dla Rzeszowa (`data/raw/sample.json`)](./data/raw/sample.json)
 
 
 ```text
 projekt-zespolu/
 ├── data/
-│   └── sample.json
+│   └── raw/
+│       └── sample.json
 ├── docs/
 │   ├── problem.md
 │   └── data.md
@@ -45,34 +46,32 @@ projekt-zespolu/
 
 # AeroRun — Laboratorium 3
 
-**Zakres:** Open-Meteo, synchronizacja godzin, czyszczenie, integracja z przygotowaną tabelą GIOŚ i kontrola jakości. Nie obejmuje regresji ani dashboardu.
+Lab 3 przetwarza zapisaną w Lab 2 próbkę prognoz dla Rzeszowa. Wynik zawiera jedną dobową średnią PM10 i listę godzin pogody dla każdej daty lokalnej.
 
-## Uruchomienie (Python 3.10+)
-Z katalogu głównego projektu:
+## Uruchomienie w Pythonie 3.10+
+
+W katalogu głównym projektu uruchom poniższe polecenia. Zależność `tzdata` dostarcza reguły czasu dla `Europe/Warsaw` na systemach bez bazy IANA, m.in. Windows. Właściwe przetwarzanie używa zapisanej próbki i działa bez połączenia z API.
+
 ```bash
 python -m pip install -r requirements.txt
-python scripts/prepare_data.py
-python -m unittest discover -s tests -v
+python scripts/prepare_forecast.py
 ```
-Wynik: `data/processed/aerorun_dane.csv` i `.json`.
 
-**Tryb offline:** dołączone próbki GIOŚ i Open-Meteo są **syntetyczne** i mają wyłącznie pokazać powtarzalność procedury. Nie wolno przedstawiać ich jako rzeczywistych pomiarów. `data/raw/` pozostaje nietknięte przez procedurę.
+Wejściem jest [data/raw/sample.json](./data/raw/sample.json), a wynikiem [data/processed/sample-clean.json](./data/processed/sample-clean.json). Skrypt uruchamia kontrole przed zapisem. Próbę z celowo powtórzoną godziną można wykonać poniższym poleceniem. Oczekiwany jest komunikat o duplikacie, kod wyjścia 1 i brak nowego pliku.
 
-**Tryb rzeczywisty (wymaga internetu):**
 ```bash
-python scripts/pobierz_open_meteo.py --lat 50.0413 --lon 21.9990
+python scripts/prepare_forecast.py --source data/test/forecast-duplicate.json --output data/test/forecast-rejected.json
 ```
-Zapisuje niezmienioną odpowiedź HTTP w JSON i tabelę CSV. Skrypt żąda danych w UTC i zapisuje CSV z jednoznacznym offsetem Europe/Warsaw, również przy zmianie czasu. Do integracji z rzeczywistymi PM wymagany jest plik CSV Dawida (`timestamp,pm25,pm10`), zgodny czasowo i przestrzennie. Skrypt integracyjny `integracja.py` może też sam pobrać pogodę dla danych GIOŚ: `python integracja.py --gios sciezka_do_gios.csv`.
 
-**Test błędnych danych:** `python scripts/prepare_data.py --weather data/test/open_meteo_bledne.csv --output data/test/wynik_bledny` powinien zakończyć się błędem i nie zapisać wyniku.
+[Plan pozyskania](./docs/data.md#plan-pozyskania-danych-w-lab-3), [słownik danych](./docs/data-dictionary.md) i [kontrole oraz odtworzenie wyniku](./docs/processing.md).
 
-Dokumentacja: `docs/data.md`, `docs/data-dictionary.md`, `docs/processing.md`.
+Historyczne zestawienie godzinowych pomiarów GIOŚ z reanalizą ERA5 przygotowuje `scripts/prepare_data.py`. Jego wynik `data/processed/aerorun_dane.csv` jest wejściem do eksperymentu Lab 4.
 
 
 # AeroRun — Laboratorium 4
 
-Porównanie reguł progowych z wnioskowaniem rozmytym Mamdaniego na niezmienionej
-próbce Lab 3. Dotyczy R5 i stabilności indeksu, bez oceny skuteczności zdrowotnej.
+Porównanie reguł progowych z wnioskowaniem rozmytym Mamdaniego na historycznym
+zestawie pomiarów i reanalizy. Dotyczy R5 i stabilności indeksu, bez oceny skuteczności zdrowotnej.
 
 ## Środowisko
 
@@ -95,8 +94,8 @@ Na innych platformach użyć requirements-lab4.txt i zapisać własne wersje.
 
 ## Odtworzenie eksperymentu
 
-Wejście: istniejący `data/processed/aerorun_dane.csv`, 72 syntetyczne godziny.
-Zachować ten plik bez zmian. Przygotowanie z Lab 3 można odtworzyć do osobnego
+Wejście to `data/processed/aerorun_dane.csv`, 72 godziny pomiarów GIOŚ i reanalizy ERA5.
+Przygotowanie historycznego zbioru można odtworzyć do osobnego
 katalogu: `python scripts/prepare_data.py --output results/lab3_reproduced`.
 
 ```powershell
