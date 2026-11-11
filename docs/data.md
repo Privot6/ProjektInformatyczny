@@ -2,7 +2,7 @@
 
 | Element | Ustalenie |
 |---|---|
-| Źródło | Open-Meteo Forecast API `[https://api.open-meteo.com/v1/forecast](https://open-meteo.com/en/docs?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m)` |
+| Źródło | Open-Meteo Forecast API `https://open-meteo.com/en/docs?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m`,  API GIOŚ `https://api.prognozy.ios.edu.pl/v1/PM10/1863` |
 | Właściciel danych | Open-Meteo; dane z modeli meteorologicznych udostępniane przez usługę |
 | Zakres danych | `time`, `temperature_2m`, `wind_speed_10m`, `precipitation`; pomocniczo GIOŚ `pm25`, `pm10` |
 | Okres i częstotliwość | Godzinowo, 7 dni wstecz + 1 dzień prognozy (parametry żądania) |
