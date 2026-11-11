@@ -10,13 +10,11 @@
 
 ## Opis problemu
 
-Osoby trenujące na zewnątrz (biegacze, rowerzyści) w polskich miastach w sezonie jesienno-zimowym są narażone na wysokie stężenia pyłów zawieszonych PM2.5 i PM10 oraz dynamiczne zmiany pogody. Obecnie dane o jakości powietrza i prognozy pogody znajdują się w osobnych aplikacjach i mają postać surowych wykresów bez analizy zależności między wiatrem, temperaturą a stężeniem zanieczyszczeń. W efekcie użytkownik podejmuje decyzję o wyjściu na trening intuicyjnie, narażając układ oddechowy na smog lub rezygnując z aktywności mimo sprzyjającego okna pogodowego.
+Osoby trenujące na zewnątrz w Rzeszowie muszą sprawdzać prognozę jakości powietrza i prognozę pogody w osobnych serwisach. Utrudnia to wybór dnia i godziny treningu z uwzględnieniem stężenia PM10, temperatury, opadów i wiatru.
 
 ## Cel i wartość rozwiązania
 
-**AeroRun** zastępuje ręczne przeglądanie kilku źródeł jednym narzędziem wspierającym decyzję w modelu *Rekomendacja zamiast automatycznego sterowania*. Użytkownik otrzymuje:
-* wyliczoną statystyczną zależność (współczynnik korelacji Pearsona oraz model regresji liniowej) pokazującą, jak prędkość wiatru i temperatura wpływają na przewiewanie smogu w jego lokalizacji,
-* jednoznaczną rekomendację decyzyjną (`TRENUJ` / `OGRANICZ WYSIŁEK` / `ZOSTAŃ W DOMU`) wraz ze wskazaniem najkorzystniejszych godzin treningowych w ciągu doby na podstawie progów norm WHO/GIOŚ.
+**AeroRun** ma pomóc wybrać godzinę treningu i ocenić warunki przed wyjściem. Lab 2 sprawdza dane wejściowe dla Rzeszowa: średnią dobową prognozę PM10 opracowaną przez IOŚ-PIB i publikowaną także przez GIOŚ oraz godzinową temperaturę, opady i prędkość wiatru z Open-Meteo. Rekomendacja treningowa wymaga ustalenia reguł oceny, a analiza zależności pogody od PM10 wymaga dodatkowych danych historycznych.
 
 ## Odbiorcy rozwiązania
 
@@ -31,7 +29,7 @@ Osoby trenujące na zewnątrz (biegacze, rowerzyści) w polskich miastach w sezo
 
 * 📄 [Analiza problemu i wymagania (`docs/problem.md`)](./docs/problem.md)
 * 📊 [Analiza źródeł danych i pomysł realizacji (`docs/data.md`)](./docs/data.md)
-* 📁 [Próbka danych z API GIOŚ i Open-Meteo (`data/sample.json`)](./data/sample.json)
+* 📁 [Rzeczywista próbka prognoz PM10 i pogody dla Rzeszowa (`data/sample.json`)](./data/sample.json)
 
 
 ```text
