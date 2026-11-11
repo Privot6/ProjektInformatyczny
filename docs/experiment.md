@@ -61,4 +61,5 @@ Do oceny przyszłego zastosowania potrzebne są pomiary z kilku sezonów, progno
 
 ## Odtworzenie i wkład
 
+W projektowym `.venv` z Pythonem 3.12.14 i scikit-learn 1.7.2 uruchomiono `python scripts/compare_methods.py`, następnie `python scripts/reproduce_lab4.py`. Oczekiwano tych samych 19 dat i ośmiu plików identycznych bajtowo. Wszystkie osiem plików miało zgodne SHA-256. W innym środowisku możliwe są różnice zaokrągleń. Tolerancja weryfikacji metryk to 10⁻⁶ µg/m³.
 
