@@ -4,8 +4,8 @@
 
 | Źródło | Co można pobrać? | Czy odpowiada potrzebom? | Dowód sprawdzenia | Braki lub ryzyko |
 |---|---|---|---|---|
-| IOŚ-PIB, prognoza PM10 publikowana również przez GIOŚ (źródło podstawowe) | Średnie dobowe stężenie PM10 w µg/m³ dla miasta Rzeszowa (TERYT 1863) | częściowo. Pokrywa dane dobowe potrzebne w R1, R2 i R5. | [Endpoint PM10](https://api.prognozy.ios.edu.pl/v1/PM10/1863/), [dokumentacja GIOŚ](https://powietrze.gios.gov.pl/pjp/content/api), [kod TERYT w wykazie GUS](https://bip.stat.gov.pl/files/gfx/bip/pl/defaultstronaopisowa/142/1/1/wykaz_identyfikatorow_i_nazw_jednostek_podzialu_terytorialnego_kraju_01012015.pdf), [próbka](../data/sample.json) | Brak wartości godzinowych, strefy doby w odpowiedzi i historycznego okresu do R4. |
-| Open-Meteo Forecast API (źródło uzupełniające) | Godzinowa temperatura na 2 m, opady i prędkość wiatru na 10 m dla 50.0413, 21.999 | tak dla danych pogodowych wymaganych w R1, R2 i R5. | [Endpoint prognozy](https://api.open-meteo.com/v1/forecast?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m), [dokumentacja Open-Meteo](https://open-meteo.com/en/docs), [próbka](../data/sample.json) | Wynik modelu dla komórki siatki. Domyślne czasy są w GMT, a zakres zapytania przesuwa się wraz z datą. |
+| IOŚ-PIB, prognoza PM10 publikowana również przez GIOŚ (źródło podstawowe) | Średnie dobowe stężenie PM10 w µg/m³ dla miasta Rzeszowa (TERYT 1863) | częściowo. Pokrywa dane dobowe potrzebne w R1, R2 i R5. | [Endpoint PM10](https://api.prognozy.ios.edu.pl/v1/PM10/1863/), [dokumentacja GIOŚ](https://powietrze.gios.gov.pl/pjp/content/api), [kod TERYT w wykazie GUS](https://bip.stat.gov.pl/files/gfx/bip/pl/defaultstronaopisowa/142/1/1/wykaz_identyfikatorow_i_nazw_jednostek_podzialu_terytorialnego_kraju_01012015.pdf), [próbka](../data/raw/sample.json) | Brak wartości godzinowych, strefy doby w odpowiedzi i historycznego okresu do R4. |
+| Open-Meteo Forecast API (źródło uzupełniające) | Godzinowa temperatura na 2 m, opady i prędkość wiatru na 10 m dla 50.0413, 21.999 | tak dla danych pogodowych wymaganych w R1, R2 i R5. | [Endpoint prognozy](https://api.open-meteo.com/v1/forecast?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m), [dokumentacja Open-Meteo](https://open-meteo.com/en/docs), [próbka](../data/raw/sample.json) | Wynik modelu dla komórki siatki. Domyślne czasy są w GMT, a zakres zapytania przesuwa się wraz z datą. |
 
 ## Wyniki pobrania i ocena obu źródeł
 
@@ -24,7 +24,7 @@
 | Licencja, wykorzystanie i prywatność | Próbka zawiera prognozy miejskie bez danych osobowych. Przytaczamy wydawcę, adres i datę pobrania. Dokumentacja IOŚ-PIB nie wskazuje odrębnej licencji dla endpointu. GIOŚ wymaga wskazania źródła przy ponownym wykorzystaniu informacji z portalu. [Dokumentacja GIOŚ](https://powietrze.gios.gov.pl/pjp/content/api) | Dane na CC BY 4.0, z podaniem źródła Open-Meteo i oznaczeniem ewentualnych zmian. Próbka zawiera dane pogodowe bez danych osobowych. [Warunki Open-Meteo](https://open-meteo.com/en/terms) |
 | Próba ponownego pobrania | Wykonano 11.11.2026 tym samym adresem. HTTP 200, te same trzy daty i wartości. Kolejne wydania prognozy zmieniają daty lub wartości. | Wykonano 11.11.2026 tym samym adresem. HTTP 200, zgodne jednostki i początek serii. Późniejsze żądanie może zwrócić inną wersję prognozy. |
 
-Plik [data/sample.json](../data/sample.json) zawiera metadane pobrania i treści pierwszych odpowiedzi po odczycie JSON. Wartości i nazwy pól zachowano. Do odtworzenia sprawdzenia wystarczy otworzyć zapisane adresy i porównać strukturę odpowiedzi z próbką.
+Plik [data/raw/sample.json](../data/raw/sample.json) zawiera metadane pobrania i treści pierwszych odpowiedzi po odczycie JSON. Wartości i nazwy pól zachowano. Do odtworzenia sprawdzenia wystarczy otworzyć zapisane adresy i porównać strukturę odpowiedzi z próbką.
 
 ## Braki i pomysł realizacji
 
@@ -42,10 +42,27 @@ Plik [data/sample.json](../data/sample.json) zawiera metadane pobrania i treści
 - Instrukcja Lab 2 wymaga przechowywania karty projektu poza publicznym repozytorium. `Karta_projektu_wypelniona.docx` jest nadal śledzona w Git i widoczna na GitHub.
 
 
-## Lab 4 Dane dla wnioskowania rozmytego
+## Plan pozyskania danych w Lab 3
 
-Eksperyment korzysta z niezmienionego data/processed/aerorun_dane.csv: 72 godziny
-syntetyczne z Lab 3. Nie pobiera nowych pomiarów. Walidatory PM i pogody zapisują
+| Element | Ustalenie zespołu |
+|---|---|
+| Źródło lub sposób pomiaru | Prognoza PM10 z [IOŚ-PIB](https://api.prognozy.ios.edu.pl/v1/PM10/1863/) i pogoda z [Open-Meteo Forecast API](https://api.open-meteo.com/v1/forecast?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m). |
+| Właściciel danych | IOŚ-PIB opracowuje prognozę PM10 udostępnianą również przez GIOŚ. Open-Meteo udostępnia prognozę pogody z modeli meteorologicznych. |
+| Zakres danych | Prognoza PM10 dla miasta Rzeszowa i temperatura, opady oraz prędkość wiatru dla wskazanych współrzędnych. |
+| Okres i częstotliwość | PM10 raz na dobę od 11 do 13.11.2026. Pogoda co godzinę od 11.11.2026 00:00 do 17.11.2026 23:00 GMT. |
+| Jednostka obserwacji | Dobowa prognoza PM10 dla miasta oraz godzinowa prognoza pogody dla punktu. Wspólny klucz zestawienia to data lokalna. |
+| Dobór obserwacji i liczebność próby | Użyto wszystkich 3 dat PM10 i 168 godzin pogody z próbki Lab 2. Po zmianie strefy pogoda obejmuje 8 lokalnych dat, w tym niepełną pierwszą i ostatnią dobę. |
+| Sposób pobrania | GET dla PM10 z kodem `1863` w ścieżce. GET dla pogody z `latitude=50.0413`, `longitude=21.999`, `hourly=temperature_2m,precipitation,wind_speed_10m` i domyślną strefą GMT. Odpowiedzi pobrano 11.11.2026 około 18:45 czasu polskiego. [Próbka Lab 2](../data/raw/sample.json) została przeniesiona do `data/raw/` z zachowaniem zawartości i metadanych. |
+| Limit, koszt lub wymagane uprawnienia | Oba zapytania wykonano bez klucza i logowania. Dla prognoz PM10 nie znaleziono opublikowanego limitu ani cennika. Bezpłatne API Open-Meteo jest przeznaczone do użytku niekomercyjnego w limitach podanych w tabeli oceny źródeł. |
+| Licencja i zasady publikacji | Przy prognozie PM10 podano wydawcę, adres i datę. Dokumentacja endpointu nie podaje odrębnej licencji. Dane Open-Meteo są udostępniane na CC BY 4.0. Próbka zawiera dane środowiskowe bez danych osobowych. |
+| Osoba odpowiedzialna za pozyskanie | W dotychczasowej historii Git `@Privot6` opracował źródła i zapisał próbkę Lab 2 (`ef0e925`, `d557121`), a `@kacperd02` przygotował pobieranie pogody (`039fa58`). Proponowany podział ponownego pozyskania to PM10 dla `@Privot6` i Open-Meteo dla `@kacperd02`. |
+| Plan awaryjny | Przy niedostępnym API użyć zapisanej próbki z widoczną datą jej pobrania. Brakujące prognozy zostają jawnie oznaczone w wyniku. |
+
+## Dane dla wnioskowania rozmytego w Lab 4
+
+Eksperyment korzysta z `data/processed/aerorun_dane.csv`, który zawiera 72 godziny
+pomiarów GIOŚ i reanalizy ERA5 według [metadanych źródłowych](../data/raw/provenance.json).
+Walidatory PM i pogody zapisują
 odrębne raporty jakości i SHA-256. Definicje pól pozostają w data-dictionary.md,
 a kontrakt wejścia w lab4_data.md i lab4_air.md.
 

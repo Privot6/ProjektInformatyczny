@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "project": "AeroRun",
+    "city": "Rzeszów",
+    "teryt": "1863",
+    "sources": {
+      "ios_pib_pm10": {
+        "url": "https://api.prognozy.ios.edu.pl/v1/PM10/1863/",
+        "publisher": "IOŚ-PIB",
+        "content_type": "text/html; charset=utf-8",
+        "retrieved_at_utc": "2026-11-11T17:45:14Z",
+        "http_status": 200
+      },
+      "open_meteo": {
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=50.0413&longitude=21.999&hourly=temperature_2m,precipitation,wind_speed_10m",
+        "publisher": "Open-Meteo",
+        "content_type": "application/json; charset=utf-8",
+        "retrieved_at_utc": "2026-11-11T17:45:15Z",
+        "http_status": 200
+      }
+    }
+  },
+  "ios_pib_pm10": {
+    "20261111": 39.73,
+    "20261112": 31.59,
+    "20261113": 37.07
+  },
+  "open_meteo": {
+    "latitude": 50.03909,
+    "longitude": 22.010834,
+    "generationtime_ms": 0.0934600830078125,
+    "utc_offset_seconds": 0,
+    "timezone": "GMT",
+    "timezone_abbreviation": "GMT",
+    "elevation": 213,
+    "hourly_units": {
+      "time": "iso8601",
+      "temperature_2m": "°C",
+      "precipitation": "mm",
+      "wind_speed_10m": "km/h"
+    },
+    "hourly": {
+      "time": [
+        "2026-11-11T00:00",
+        "2026-11-11T00:00"
+      ],
+      "temperature_2m": [
+        3.1,
+        3.2
+      ],
+      "precipitation": [
+        0,
+        0
+      ],
+      "wind_speed_10m": [
+        17.3,
+        15.8
+      ]
+    }
+  }
+}
