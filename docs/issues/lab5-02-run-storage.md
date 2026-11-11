@@ -2,7 +2,7 @@
 
 Status: do realizacji.
 Odpowiedzialny: Kacper Dąbek.
-Wymagania: R1, R2, R3 i R5.
+Wymagania: R1, R2, R3 i R4.
 Powiązanie: docs/lab5/data-model.md i ADR-001.
 
 ## Cel
@@ -13,9 +13,9 @@ Lab 4 do stałego katalogu nie gwarantuje publikacji wszystkich plików razem.
 ## Kryteria odbioru
 
 - Nowy run_id i manifest odpowiadają schematowi projektu; istniejące CSV nie zmieniają kolumn.
-- Kopie input.csv i config.json odpowiadają input_sha256 oraz config_sha256.
-- Są oba scenariusze, po dwa warianty na każdą godzinę, bez powtórzeń kluczy.
-- Niepełna próba poniżej 48 godzin, luka czasu lub brak pomiaru jest odrzucony przed obliczeniami.
+- Kopie próbki Lab 3, metadanych źródeł i parametrów odpowiadają hashom manifestu.
+- Są oba scenariusze, dwie metody na datę testową i unikalne klucze.
+- Niepełne doby są raportowane i wyłączone zgodnie z protokołem Lab 4.
 - Błąd zapisu drugiego scenariusza nie publikuje nowego przebiegu i nie uszkadza poprzedniego.
 - Kolizja run_id nie nadpisuje katalogu; brak lub niezgodny hash daje błąd odczytu.
 - Walidacja manifestu i powiązań poprzedza zwrócenie RunView.

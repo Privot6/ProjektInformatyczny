@@ -41,3 +41,5 @@ Zakres podstawowy obejmuje miasto Rzeszów (TERYT 1863) oraz prognozę pogody dl
 | R5 | Użytkownik dostaje rekomendację `TRENUJ`, `OGRANICZ WYSIŁEK` albo `ZOSTAŃ W DOMU` i może porównać dostępne godziny. | Przypadki z różną pogodą i tą samą dobową wartością PM10 dają wyniki zgodne z udokumentowanymi regułami. Wynik podaje, że PM10 jest średnią dobową. | Cel użytkowy karty projektu | założenie | @maksym1144 |
 
 Kolumna „Osoba” zawiera proponowanych opiekunów wymagań na podstawie wkładu widocznego w Git. Podział wymaga potwierdzenia przez zespół.
+
+[Eksperyment Lab 4](experiment.md) dostarcza liczebność próby, korelacje i parametry regresji dla R4 w badanym okresie.

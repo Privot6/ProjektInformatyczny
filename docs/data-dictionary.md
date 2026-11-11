@@ -39,7 +39,7 @@ Plik [data/processed/sample-clean.json](../data/processed/sample-clean.json).
 | `days[].weather[].precipitation` | Suma opadów za poprzednią godzinę przejęta z prognozy | liczba lub `null` | mm | `0.0` | tak, jeśli brakuje wartości w źródle |
 | `days[].weather[].wind_speed_10m` | Prędkość wiatru na 10 m przejęta z prognozy | liczba lub `null` | km/h | `17.3` | tak, jeśli brakuje wartości w źródle |
 
-## Dane historyczne do eksperymentu Lab 4
+## Wcześniejsze zestawienie historyczne
 
 Dotyczy: `data/raw/open_meteo_pogoda.csv`, `data/raw/gios_pomiary.csv` i `data/processed/aerorun_dane.csv`.
 

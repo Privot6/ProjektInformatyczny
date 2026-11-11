@@ -1,12 +1,12 @@
 # ADR-001 Zapis uruchomień w plikach CSV i JSON
 
 Status: przyjęta w projekcie Lab 5, implementacja zmiany planowana.
-Wymaganie: R5 i odtwarzalność porównania z Lab 4.
+Wymaganie: R4 i odtwarzalność porównania z Lab 4.
 
 ## Kontekst
 
-Jeden użytkownik uruchamia lokalną analizę godzinowych danych jednej stacji.
-Istniejące skrypty i dashboard używają CSV/JSON. results/lab4/ zachowuje tylko
+Jeden użytkownik uruchamia lokalną porównanie modeli na dobowych danych jednej stacji.
+Istniejący skrypt używa CSV/JSON. results/lab4/ zachowuje tylko
 jeden komplet wyników i może zostać nadpisany. Niezależne zapisy kilku plików
 mogą pozostawić niepełny komplet po awarii. Nie ma wymagania wspólnej historii
 przez sieć, współbieżnego zapisu ani zapytań SQL po dużym zbiorze uruchomień.
@@ -15,7 +15,7 @@ przez sieć, współbieżnego zapisu ani zapytań SQL po dużym zbiorze uruchomi
 
 Pozostają CSV wyników i JSON parametrów. Każdy nowy przebieg otrzymuje osobny
 run_id UUID i katalog results/runs/<run_id>/. Kopie wejścia, konfiguracji i
-provenance.json oraz manifest z hashami wiążą wynik z dokładną wersją danych.
+metadanych źródeł oraz manifest z hashami wiążą wynik z dokładną wersją danych.
 Odpowiedzi źródeł są zachowane w data/raw/snapshots/<source_version>/.
 
 Nowy zapis trafia do .partial/<run_id>/ na tym samym systemie plików. Komplet
@@ -40,10 +40,10 @@ te dodatkowe elementy. Nie projektuje się fikcyjnej bazy do samego diagramu.
 ## Koszt i konsekwencje
 
 Brak dodatkowego serwera i pakietu bazodanowego. Zespół wykorzystuje istniejące
-umiejętności Python/Pandas i schematy plików; sama znajomość narzędzi nie zastępuje
+umiejętności Pythona i schematy plików; sama znajomość narzędzi nie zastępuje
 warunku jednego lokalnego autora zapisu. Trzeba zaimplementować i utrzymywać
 manifest, kontrolę relacji, publikację katalogu i obsługę wersji schematu.
-Kopie wejść zwiększają zajętość dysku; dla próbki 72 godzin jest to mały koszt,
+Kopie wejść zwiększają zajętość dysku; dla bieżącej próbki jest to mały koszt,
 ale historia nie jest automatycznie usuwana bez ustalonej polityki retencji.
 
 Przyjęto jednego autora zapisu i lokalny system plików z atomową zmianą nazwy

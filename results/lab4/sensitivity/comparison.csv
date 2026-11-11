@@ -1,3 +1,3 @@
-wariant,n,mean_abs_score_change_points,min_change_points,max_change_points,label_changes,no_train_failures
-bazowy,72,0.0,0.0,0.0,0,0
-rozmyty,72,0.04072336066617864,0.0,1.5073411215162764,0,0
+method,n_train,n_test,mae_ug_m3
+ridge,28,19,10.077318055482243
+tree,28,19,13.134538847117794

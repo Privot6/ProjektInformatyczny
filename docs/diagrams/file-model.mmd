@@ -1,16 +1,7 @@
 flowchart TD
-    S["SourceSnapshot: wersja zrodla i oryginalne odpowiedzi"]
-    I["InputSnapshot: wejscie CSV i input_sha256"]
-    H["HourMeasurement: timestamp oraz 5 pol liczbowych"]
-    C["ConfigSnapshot: config_sha256 i parametry"]
-    R["AnalysisRun: run_id oraz manifest"]
-    O["Observation: scenario, timestamp, wariant i wynik"]
-    M["Comparison: scenario, wariant i miary"]
-    S -->|"jedno zrodlo dla wielu wersji integracji"| I
-    I -->|"jeden snapshot zawiera wiele godzin"| H
-    I -->|"jedno wejscie dla wielu uruchomien"| R
-    C -->|"jedna konfiguracja dla wielu uruchomien"| R
-    R -->|"jedno uruchomienie zawiera wiele obserwacji"| O
-    H -->|"ta sama godzina oceniana w obu wariantach"| O
-    R -->|"jedno uruchomienie zawiera porownania"| M
-    O -->|"agregacja wedlug scenariusza i wariantu"| M
+    S["Źródła: JSON odpowiedzi i metadane z hashami"] --> R["Przebieg: parametry i daty podziału"]
+    I["Próbka prognoz Lab 3"] --> R
+    R --> O["Obserwacja: jedna doba testowa, dwa wyniki"]
+    R --> P["Próba Lab 3: prognoza IOŚ-PIB i dwie estymaty"]
+    O --> M["Porównanie: MAE na metodę i scenariusz"]
+    R --> H["Planowany manifest: run_id, status, hashe"]

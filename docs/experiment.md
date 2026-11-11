@@ -1,129 +1,64 @@
-# AeroRun Lab 4 Porównanie progów i wnioskowania rozmytego
+# Lab 4 — Porównanie modeli estymujących dobowe PM10 w Rzeszowie
 
 ## Pytanie i wymaganie
 
-Czy wnioskowanie rozmyte Mamdaniego daje stabilniejszy indeks rekomendacji niż
-reguły progowe po niewielkiej zmianie PM2.5, przy tych samych pomiarach pogodowych?
-Eksperyment wspiera R5 z docs/problem.md, czyli rekomendację dla godziny.
-Nie testuje R4 dotyczącego korelacji i regresji. Nie jest prognozą stężeń.
+Czy płytkie drzewo regresyjne szacuje średnie dobowe stężenie PM10 z temperatury, wiatru i opadów dokładniej niż regresja liniowa Ridge na późniejszych dniach? Porównanie dotyczy [R4](problem.md#wymagania), czyli historycznego związku pogody z PM10. Współczynniki Ridge pokazują kierunek i wielkość związku w modelu. Celem jest wybór metody do dalszej oceny.
 
-## Źródła zweryfikowane 2 listopada 2026
+## Literatura
 
-| Źródło | Co wyjaśnia | Ograniczenie | Co wykorzystano |
+| Źródło | Co wyjaśnia | Założenie lub ograniczenie | Zastosowanie |
 |---|---|---|---|
-| MathWorks, Fuzzy Inference Process, dokumentacja R2026b, 2026, https://www.mathworks.com/help/fuzzy/fuzzy-inference-process.html | Etapy Mamdaniego, operatory i centroid | Przykład napiwku; brak progów dla powietrza | Schemat fuzzification → reguły → agregacja → centroid |
-| Zespół scikit-fuzzy, Fuzzy Control Systems The Tipping Problem, dokumentacja online bez jawnego roku publikacji, https://scikit-fuzzy.readthedocs.io/en/latest/auto_examples/plot_tipping_problem_newapi.html | Przykład reguł językowych i ich implementacji | Demonstracja dydaktyczna, nie walidacja rekomendacji zdrowotnych | Adaptacja gotowych funkcji przynależności i defuzyfikacji do danych AeroRun |
-| MathWorks, Mamdani and Sugeno Fuzzy Inference Systems, R2026b, 2026, https://www.mathworks.com/help/fuzzy/types-of-fuzzy-inference-systems.html | Alternatywa Sugeno i różnice wyjścia | Dobór zależy od zastosowania i parametrów | Mamdani wybrany ze względu na czytelne reguły; Sugeno pominięty, bo nie potrzebujemy dopasowywania liniowych następników |
+| Zespół scikit-learn, *Ridge*, dokumentacja online, odczyt 11.11.2026. [Dokumentacja](https://scikit-learn.org/1.7/modules/generated/sklearn.linear_model.Ridge.html) | Regresja liniowa z karą L2 za duże współczynniki. | Skala cech wpływa na wielkość kary, a liniowość ogranicza postać modelu. | Standaryzacja pogody na danych uczących i Ridge jako prosty wariant bazowy. |
+| Zespół scikit-learn, *DecisionTreeRegressor*, dokumentacja online, odczyt 11.11.2026. [Dokumentacja](https://scikit-learn.org/1.7/modules/generated/sklearn.tree.DecisionTreeRegressor.html) | Drzewo dzieli przestrzeń cech i zwraca średnią celu w liściu przy kryterium błędu kwadratowego. | Głębokie drzewo może dopasować się do szumu. | Limit głębokości i minimalna liczebność liścia. |
+| Zespół scikit-learn, *Lagged features for time series forecasting*, dokumentacja online, odczyt 11.11.2026. [Przykład](https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html) | Ocena modelu na późniejszych obserwacjach i stosowanie MAE. | Sąsiednie obserwacje w czasie mogą być zależne. | Rozdzielenie danych w czasie i raportowanie błędu na wspólnym okresie. |
 
-Źródła opisują mechanikę, nie uzasadniają wybranych liczbowo progów PM, temperatury,
-wiatru ani opadu. Wszystkie te parametry są założeniami demonstracji.
-Mamdani umożliwia stopniowe przejście między ocenami, ale sam w sobie nie gwarantuje
-trafności. Baseline pozostaje obowiązkowym punktem odniesienia.
+Ridge daje prostą zależność liniową i trzy współczynniki do interpretacji. Drzewo sprawdza, czy podziały według pogody poprawiają wynik. Las losowy pominięto, bo seria obejmuje dwa miesiące, a zadanie zakłada porównanie dwóch metod o jawnych parametrach.
 
-## Protokół ustalony przed uruchomieniem
+## Warunki porównania
 
-| Element | Ustalenie |
+| Element | Co należy ustalić? |
 |---|---|
-| Dane | Niezmieniony data/processed/aerorun_dane.csv z Lab 3, 72 syntetyczne godziny od 20 do 22 października 2026, Europe/Warsaw |
-| Wersja | Stan bazowy repozytorium a30b4e16960f39bbf8bb25f69bf66fab3e347457; SHA-256 pliku w input_audit.json i run.json |
-| Jednostka obserwacji | Jedna godzina, po dwa wyniki algorytmów; 72 przypadki na wariant, 144 wiersze observations.csv |
-| Warianty | Minimum czterech ocen progowych vs trzy reguły Mamdaniego; pełne definicje w docs/lab4_model.md |
-| Wejścia | PM2.5 i PM10 w µg/m³, temperatura w °C, wiatr w km/h, opad w mm sumy godzinowej; wszystkie z tej samej godziny |
-| Parametry | Zamrożone w config/lab4.json przed pierwszym porównaniem; brak dopasowania na wynikach |
-| Scenariusz | Każda godzina w wersji oryginalnej i z PM2.5 zwiększonym dokładnie o 1 µg/m³; pozostałe wartości bez zmian |
-| Miara podstawowa | Średnia bezwzględna zmiana indeksu: mean(abs(score_plus-score)), punkty skali 0–100; mniej oznacza stabilniej |
-| Kryterium praktyczne | Na potrzeby ćwiczenia co najmniej 20% mniejsza średnia zmiana niż baseline i zero TRENUJ w dwóch kontrolach wysokiego PM; bez dodatkowych źródeł danych |
-| Dodatkowe diagnostyki | Minimum/maksimum zmian wśród godzin i liczba zmian etykiety; nie zastępują miary głównej |
-| Warunki oceny | Te same 72 godziny, bez losowania i trenowania, brak podziału train/test; oba warianty oceniają historyczne warunki |
-| Wrażliwość | Zmiana wyłącznie pm25_scale z 25 na 30 dla obu metod; te same 72 godziny, ten sam przyrost +1; wyniki w sensitivity/ |
-| Odtworzenie | Polecenia z README; wersje środowiska w requirements-lab4-lock.txt; bez ziarna, bo brak losowania |
+| Pytanie i wymaganie projektu | Czy drzewo regresyjne szacuje średnie dobowe PM10 w Rzeszowie dokładniej niż Ridge na późniejszych dniach? Wynik wspiera wybór metody do dalszej oceny w ramach [R4](problem.md#wymagania). |
+| Dane | Jedna obserwacja to lokalna doba w Rzeszowie. Z 61 dób w okresie 01.09–31.10.2026 wykorzystano 47 kompletnych. Cel to średnia z godzinowych pomiarów PM10 GIOŚ na stanowisku 16344, a cechy to dobowe średnie temperatury na 2 m i prędkości wiatru na 10 m oraz suma opadów z Open-Meteo. [Pliki źródłowe, daty pobrania i SHA-256](../data/raw/lab4/sources.json). [Próbka Lab 3 do próby zastosowania](../data/processed/sample-clean.json). |
+| Wariant bazowy i metoda | **Ridge (bazowy)** dopasowuje liniową zależność między trzema cechami pogody a PM10 z karą L2. **Drzewo regresyjne** dzieli obserwacje według cech pogody i zwraca średnią PM10 z dni uczących w danym liściu. |
+| Parametry i założenia | Ridge ma `alpha=1` i solver SVD. Standaryzację dopasowano wyłącznie na zbiorze uczącym. Drzewo używa błędu kwadratowego, `max_depth=3`, `min_samples_leaf=5` i `random_state=42`. Ujemne oszacowania obu modeli zastępowano zerem. |
+| Miara i kierunek poprawy | Średni błąd bezwzględny (MAE) względem pomiarów GIOŚ, w µg/m³. Niższa wartość oznacza lepszy wynik. |
+| Kryterium praktyczne | Drzewo uzasadnia dodatkową złożoność, jeżeli obniża MAE względem Ridge o co najmniej 1,0 µg/m³ w obu scenariuszach, przy tych samych danych wejściowych. Próg jest założeniem projektu. |
+| Warunki oceny | Chronologiczny podział na 28 kompletnych dób uczących z okresu 01.09–11.10.2026 i 19 kompletnych dób testowych z okresu 12.10–31.10.2026. Obie metody ocenia się na tych samych datach. Pominięte doby są wymienione w [metryce przebiegu](../results/lab4/run.json). |
+| Próba wrażliwości | Zmieniono wyłącznie `max_depth` drzewa z 3 na 4. [Wyniki próby](../results/lab4/sensitivity/comparison.csv). |
+| Odtworzenie | W katalogu projektu uruchom `.\.venv\Scripts\python.exe scripts/compare_methods.py`, a do sprawdzenia powtarzalności `.\.venv\Scripts\python.exe scripts/reproduce_lab4.py`. Ziarno drzewa wynosi 42. [Instrukcja w README](../README.md). |
 
-Próg 20% jest przyjętym kryterium ćwiczenia, nie uzgodnioną preferencją użytkownika
-końcowego. Jeżeli średnia baseline wynosi zero, względna poprawa jest niezdefiniowana
-i kryterium nie jest uznawane za spełnione. Brak powtórzeń losowych: min/max dotyczy
-różnych godzin, nie przedziału ufności. Powtórzenie obliczeń sprawdza odtwarzalność.
+Suma opadów obejmuje wartości oznaczone lokalną datą. Każda wartość dotyczy godziny poprzedzającej znacznik, więc do sumy wchodzi przedział kończący się o północy rozpoczynającej dzień. Dane archiwalne Open-Meteo służą do historycznej estymacji. Do oceny prognoz przyszłego PM10 trzeba zebrać wersje danych pogodowych dostępne przed ocenianą dobą. Prognoza obszarowa IOŚ-PIB z Lab 3 służy jako kontekst przy próbie zastosowania. Wartością docelową w treningu i teście jest pomiar punktowy GIOŚ.
 
-## Kontrole i ograniczenia
+Źródła danych to [archiwum pomiarów GIOŚ](https://powietrze.gios.gov.pl/pjp/content/api) oraz [Open-Meteo Forecast API](https://open-meteo.com/en/docs), z atrybucją Open-Meteo zgodnie z [warunkami CC BY 4.0](https://open-meteo.com/en/terms).
 
-Przed obliczeniami kontrolowane są duplikaty, braki, offset czasu, pełne godziny,
-ciągłość UTC i poprawność jednostek/zakresów. Wyniki audytów zapisano w raportach JSON. Dane Lab 3 nie są modyfikowane. Kontrolne przypadki wysokiego
-PM2.5 i PM10 używają najlepszej pogody i są zapisane w control_checks.csv.
+## Wyniki
 
-Miara dotyczy stabilności indeksu, nie prawdziwości etykiet. Metoda stała również
-mogłaby mieć zerową zmianę, dlatego samej stabilności nie wolno utożsamiać z jakością.
-Dwie kontrole skrajnych warunków nie wykluczają pozostałych błędów reguł.
-Brakuje niezależnych ocen eksperckich, zróżnicowanych rzeczywistych danych,
-uzasadnionych progów, profilu użytkownika i kosztu błędnej rekomendacji.
-Do oceny trafności potrzebne są niezależne etykiety przyznane przed porównaniem
-oraz miara pominięć niekorzystnych warunków. Nie tworzymy pseudoetykiet tymi
-samymi regułami, które potem oceniamy.
+Z 61 lokalnych dób 47 miało komplet danych. Odpadło 13 dat uczących i jedna data testowa. Wśród 14 odrzuconych dat 10 miało niepełną pogodę, siedem miało luki PM10, a trzy miały oba braki. Dokładne daty i liczby godzin są w [run.json](../results/lab4/run.json). Doba zmiany czasu 25.10 miała 25 godzin. Oba modele otrzymały 28 dób do dopasowania i 19 tych samych dób do oceny.
 
-Interpolacja Lab 3 mogła korzystać z późniejszych godzin. W ocenie historycznej
-opisuje to sposób budowy próbki; w eksperymencie online byłby to potencjalny
-wyciek informacji. Nie potwierdzamy gotowości do pracy w czasie rzeczywistym.
-Wnioskowanie nie wykazuje związku przyczynowego pogody ze stężeniami pyłów.
+| Scenariusz | Model i parametry | MAE [µg/m³] | Koszt lub ograniczenie |
+|---|---|---:|---|
+| Główny | Ridge, alpha = 1 | 10,0773 | Trzy współczynniki. Zależność liniowa może ekstrapolować poza zakres uczący. |
+| Główny | Drzewo, limit głębokości 3, liść od 5 dni | 13,1345 | Model zwraca średnie z podzbiorów dni uczących. |
+| Wrażliwość | Ridge, alpha = 1 | 10,0773 | Ten sam zbiór uczący i te same parametry. |
+| Wrażliwość | Drzewo, limit głębokości 4, liść od 5 dni | 13,1345 | Dopasowane drzewo osiągnęło głębokość 3 także przy wyższym limicie. |
 
-## Kontrola ręczna i użycie AI
+**Wybór do dalszej oceny to Ridge.** W obu scenariuszach miała MAE niższy o 3,0572 µg/m³, czyli 23,28% względem drzewa. Drzewo nie osiągnęło wymaganego spadku MAE o 1,0 µg/m³ względem Ridge. Oba modele wymagają tych samych danych. Zwiększenie limitu głębokości nie zmieniło wyboru. [Wyniki główne](../results/lab4/comparison.csv) · [Próba wrażliwości](../results/lab4/sensitivity/comparison.csv)
 
-Gotowy przykład: `python examples/lab4/fuzzy_demo.py`. Dla najlepszego zestawu
-wejść centroid trójkąta (70,0), (100,1), (100,0) wynosi 90. Dla silnego PM
-centroid niskiego trójkąta wynosi 10. Test sprawdza oba wyniki.
-AI wykorzystano do przygotowania kodu porównania, uporządkowania dokumentacji
-i wyszukania źródeł. Wyniki sprawdzono testami, porównaniem dwóch uruchomień
-oraz odrębnym przeliczeniem sum z CSV.
+## Kontrola ręczna i diagnostyka
 
-## Wyniki wykonanego porównania
+Dla 12.10.2026 pogoda miała średnią temperaturę 9,5667 °C, średni wiatr 10,1292 km/h i sumę opadów 0 mm. Po przeliczeniu współczynników Ridge na jednostki oryginalne prognoza wynosi `−0,842131 + 1,608384 × 9,566667 + 0,118688 × 10,129167 − 0,663715 × 0 ≈ 15,74695` µg/m³. Przy pomiarze 14,40 µg/m³ błąd bezwzględny wynosi 1,34695 µg/m³. Drzewo przypisało tę dobę do liścia z wartościami uczącymi 7,3875, 6,9667, 7,8625, 8,4708, 10,4375, 18,4333 i 14,0125. Ich średnia to 10,51012 µg/m³, a błąd bezwzględny 3,88988 µg/m³. Obie wartości zgadzają się z pierwszym wierszem CSV. Suma błędów z 19 dób wynosi odpowiednio 191,4690 i 249,5562 µg/m³. Dzielenie przez 19 daje MAE 10,0773 i 13,1345 µg/m³. [Obserwacje](../results/lab4/observations.csv) · [Współczynniki i liść](../results/lab4/run.json)
 
-| Scenariusz i wariant | Godziny | Średnia zmiana [pkt] | Min–max [pkt] | Zmiany etykiety |
-|---|---:|---:|---:|---:|
-| Podstawowy, bazowy | 72 | 10.000000 | 0.000000–40.000000 | 18 |
-| Podstawowy, rozmyty | 72 | 1.439708 | 0.000000–5.520755 | 8 |
-| Wrażliwość pm25_scale=30, bazowy | 72 | 0.000000 | 0.000000–0.000000 | 0 |
-| Wrażliwość pm25_scale=30, rozmyty | 72 | 1.847444 | 0.000000–9.540610 | 0 |
+W części uczącej korelacje Pearsona z PM10 wynoszą +0,399 dla temperatury, −0,132 dla wiatru i −0,391 dla opadów. Współczynniki warunkowe Ridge wynoszą odpowiednio +1,608 µg/m³ na °C, +0,119 µg/m³ na km/h i −0,664 µg/m³ na mm. Odmienny znak dla wiatru przy porównaniu obu miar wskazuje, że zależność pojedynczej zmiennej i współczynnik po uwzględnieniu pozostałych cech mogą się różnić. Wynik opisuje związek w tej próbce.
 
-W wariancie podstawowym średnia zmiana indeksu spadła z 10,000000 do 1,439708 pkt,
-czyli o 8,560292 pkt (85.60%). Kryterium demonstracyjne 20% zostało
-spełnione. Obie metody przeszły po dwa przypadki wysokiego PM bez etykiety TRENUJ.
-Liczba zmian etykiety wyniosła odpowiednio 18 i 8; to diagnostyka, nie ocena błędów.
+Dni testowe były chłodniejsze. Średnie temperatury dobowe miały zakres 5,66–12,47 °C wobec 10,65–18,48 °C w uczeniu. Średnia reszta (pomiar minus estymacja) wynosiła +9,66 µg/m³ dla Ridge i +13,13 µg/m³ dla drzewa. Oba modele zaniżały wyniki w tym okresie. Jeden podział czasowy nie daje miary rozrzutu między sezonami.
 
-Po zmianie pm25_scale z 25 na 30 baseline nie zmienił indeksu w żadnej z godzin,
-a model rozmyty zmieniał go średnio o 1,847444 pkt. W tym scenariuszu metoda
-progowa jest stabilniejsza, a względnej poprawy nie wyliczamy, bo baseline=0.
-Nie oznacza to, że próg jest trafniejszy: próbka po zmianie skali nie przekracza
-jego granicy. Kryterium dla modelu rozmytego nie zostało spełnione w próbie
-wrażliwości, więc wynik podstawowy nie daje odpornego uzasadnienia przewagi.
+## Zastosowanie do Lab 3 i ograniczenia
 
-Wniosek: wnioskowanie rozmyte pozostaje wybraną przez zespół metodą projektową,
-ale ten eksperyment nie dowodzi jej ogólnej przewagi. Kosztem jest konieczność
-utrzymywania funkcji przynależności, reguł i dodatkowych zależności. Nie potrzeba
-nowych pól wejściowych; korzyść biznesowa nie została wykazana. Przed użyciem
-praktycznym potrzebne są rzeczywiste dane i niezależna ocena etykiet oraz
-uzgodnienie kryteriów z odbiorcami. Nie dobierano progów po obejrzeniu wyników.
+Oba modele uruchomiono na dwóch pełnych dniach z [próbki Lab 3](../data/processed/sample-clean.json). [Wynik zastosowania](../results/lab4/lab3_application.csv) zestawia oszacowania z opublikowaną prognozą IOŚ-PIB. Prognozy IOŚ-PIB są średnimi obszarowymi, a cel modelu dotyczy jednej stacji. Do obliczenia rzeczywistego błędu na dniach Lab 3 potrzebne są późniejsze pomiary. W tej próbie Ridge dla 13.11 dała 0 po obcięciu ujemnego wyniku. Średnia temperatura i opady tej doby wykraczają poza zakres treningu, co jest istotnym ograniczeniem stosowania modelu.
 
-Audyt danych wykrył 8 syntetycznych godzin z PM2.5 > PM10. Zachowano je i
-oznaczono do przeglądu. Jest to dodatkowy powód, by nie interpretować próbki
-jako pomiarów referencyjnych. Nie usuwano niewygodnych rekordów z porównania.
+Do oceny przyszłego zastosowania potrzebne są pomiary z kilku sezonów, prognozy Open-Meteo zapisane przed ocenianą dobą oraz osobny okres testowy. Brakujące doby mogły zmienić reprezentatywność próby. Dane nie rozstrzygają o wpływie pogody na stężenie, przydatności modelu w innych częściach miasta ani trafności rekomendacji treningowych R5.
 
-## Kontrola liczb na zapisanym wyniku
+## Odtworzenie i wkład
 
-Dla 20 października 2026, 08:00+02:00: PM2.5=19,21, PM10=27,90,
-temperatura=10,88°C, wiatr=11,16 km/h, opad=0. Znormalizowany PM przed zmianą:
-max(19,21/25; 27,90/50)=0,7684. Po +1 µg/m³: max(20,21/25; 0,558)=0,8084.
-Przekracza to próg dobrego wejścia 0,8, podczas gdy pozostałe wejścia są dobre.
-Baseline zmienia indeks 90 → 50, zatem bezwzględna zmiana wynosi 40 pkt.
-Model rozmyty dla tego samego wiersza daje 64.544252 →
-61.947524, zmianę 2.596728 pkt.
 
-Suma zmian baseline w 72 godzinach wynosi 720, więc miara=720/72=10 pkt.
-Suma zmian modelu rozmytego wynosi 103,65900545149316, więc po podzieleniu
-przez 72 otrzymujemy 1,439708409048516 pkt. Sumy sprawdzono odrębnym odczytem
-CSV i arytmetyką dziesiętną, poza funkcją wyliczającą porównanie.
-
-## Odtwarzalność
-
-Przygotowanie Lab 3 odtworzono w katalogu tymczasowym: otrzymano te same 72
-rekordy co w próbce. Dwa uruchomienia Lab 4 dały identyczne bajtowo pliki CSV
-i JSON. Kontrole obejmowały kompletność przypadków, zgodność pomiarów i zmianę
-PM2.5 o 1 µg/m³. Wyniki zapisano w `results/lab4/reproducibility.json`
-i `results/lab4/pm_results_check.json`. Zestaw 19 testów obejmuje dane, model,
-odtwarzalność i oba scenariusze interfejsu.

@@ -2,14 +2,13 @@
 
 Status: do przeglądu.
 Odpowiedzialny za zebranie wyniku: Kacper Dąbek.
-Wymaganie: przegląd projektu Lab 5, UC-01 powiązany z R5.
+Wymaganie: przegląd projektu Lab 5, UC-01 powiązany z R4.
 
 ## Wynik kontroli technicznej
 
-Nazwy pól wejściowych i wynikowych porównano z Lab 3–4. Wyniki liczbowe odnoszą
-się do próbki rzeczywistej, nie wcześniejszej syntetycznej. Zidentyfikowano brak
-run_id i atomowej publikacji w obecnym zapisie oraz brak egzekwowania minimum
-48 godzin w load_data. W projekcie oznaczono je jako zmiany planowane.
+Nazwy pól i scenariusze opisano według danych Lab 3 oraz eksperymentu Lab 4.
+Sprawdzenie przez zespół powinno objąć chronologiczny podział na kompletne doby,
+zgodność MAE i planowaną publikację całych przebiegów.
 
 ## Obszary niezależnego przeglądu
 
