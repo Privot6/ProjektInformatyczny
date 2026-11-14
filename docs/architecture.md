@@ -75,3 +75,8 @@ flowchart LR
     I -->|"dane dla wybranej daty"| V["Widok warunków"]
     S -->|"ostatni zapisany dzień przy błędzie pobrania"| V
 ```
+## Model danych i zapis
+
+Zapis lokalny zastępuje poprzedni zestaw dopiero po zweryfikowaniu obu odpowiedzi. Odpowiedzi mogą mieć różne zakresy dat. Brak wartości pozostaje jawny. Próbka Lab 3 służy do testowania modułu. [ERD i model fizyczny](lab5/data-model.md) · [Schemat SQL](lab5/schema.sql)
+
+[Podział zadań](issues/lab5-implementation.md) · [Przegląd projektu](issues/lab5-review.md)
