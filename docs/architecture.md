@@ -25,3 +25,53 @@ AeroRun to aplikacja mobilna React Native (TypeScript) dla osób planujących tr
 ## Interfejs aplikacji
 
 Ekran wywołuje `checkForecast(date)`. [Kontrakt](lab5/contracts.md) opisuje wejście, jednostki, braki i błędy. Adresy publicznych API podano w [opisie danych](data.md).
+
+## Sekwencja UML
+
+```mermaid
+sequenceDiagram
+    actor U as Użytkownik
+    participant A as Ekran React Native
+    participant L as Moduł prognozy
+    participant P as API IOŚ-PIB
+    participant W as Open-Meteo
+    participant B as SQLite telefonu
+    U->>A: Wybiera datę i naciska Sprawdź
+    A->>L: checkForecast(date)
+    alt Nieprawidłowa data
+        L-->>A: INVALID_DATE
+    else Poprawna data
+        par Prognoza dobowa PM10
+            L->>P: GET PM10 dla TERYT 1863
+            P-->>L: Treść odpowiedzi lub błąd
+        and Prognoza pogody
+            L->>W: GET prognozy godzinowej
+            W-->>L: Treść odpowiedzi lub błąd
+        end
+        L->>L: Waliduje i zestawia dane według daty
+        alt Błąd pobrania lub walidacji
+            L->>B: Odczytuje wcześniejszy dzień
+            L-->>A: Błąd odświeżenia, opcjonalnie dane zapisane
+        else Dane poprawne
+            L->>B: Zapisuje zestaw w jednej transakcji
+            alt Zapis poprawny
+                L-->>A: Dzień albo DATE_NOT_AVAILABLE
+            else Błąd zapisu
+                L-->>A: Świeży wynik z pamięci i ostrzeżenie albo brak dnia
+            end
+        end
+    end
+    A-->>U: Wynik z jednostkami i czasem pobrania lub komunikat
+```
+
+## Przepływ danych
+
+```mermaid
+flowchart LR
+    U["Sprawdź w React Native"] --> I["Pobranie i walidacja w aplikacji"]
+    P["IOŚ-PIB"] -->|"JSON: data i PM10"| I
+    W["Open-Meteo"] -->|"JSON: czas i trzy pola pogody"| I
+    I -->|"doby lokalne i godziny UTC"| S[("SQLite telefonu")]
+    I -->|"dane dla wybranej daty"| V["Widok warunków"]
+    S -->|"ostatni zapisany dzień przy błędzie pobrania"| V
+```
