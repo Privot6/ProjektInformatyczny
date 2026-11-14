@@ -1,18 +1,25 @@
-# Kontrakt analizy i prezentacji wyników
+# Kontrakt modułu sprawdzania prognoz
 
-## Istniejące obliczenia Lab 4
+Ekran React Native wywołuje `checkForecast(date: string): Promise<ForecastCheckResult>` wyłącznie po naciśnięciu **Sprawdź**. `date` to poprawna data kalendarzowa `YYYY-MM-DD` w strefie `Europe/Warsaw`. Moduł pobiera dwa JSON-y przez HTTPS według [adresów z Lab 2](../data.md). Miasto to Rzeszów, TERYT 1863.
 
-`run(raw_dir, lab3_path, output)` z `scripts/compare_methods.py` odczytuje dane archiwalne, przygotowuje kompletne doby, wykonuje podział czasowy i porównuje Ridge z drzewem. Zwraca klucz metody wybranej do dalszej oceny (`ridge` lub `tree`) i zapisuje wyniki obu scenariuszy. Jednostką wyniku jest µg/m³. Kontrakt plików opisuje [model danych](data-model.md).
-
-Walidacja obejmuje hashe źródeł, czasy, jednostki, stanowisko GIOŚ, duplikaty, zakresy i kompletność. Niepełne doby historyczne są pomijane i wymienione w metadanych. Brak poprawnego wejścia daje błąd. Estymaty z próby zastosowania na prognozach Lab 3 nie mają pomiaru referencyjnego.
-
-## Planowana publikacja i odczyt
-
-| Interfejs | Zachowanie |
+| Pole wyniku | Typ i znaczenie |
 |---|---|
-| `prepare_run(raw_dir, lab3_path, output_root) → RunRef` | Uruchamia obliczenia w katalogu roboczym. Zwraca `run_id` po walidacji i atomowej publikacji kompletnego katalogu. |
-| `load_run(run_id) → RunView` | Sprawdza wersję schematu, komplet plików, hashe i powiązania dat. Zwraca dane gotowe do prezentacji. |
-| Planowany dashboard | Umożliwia wybór przebiegu, scenariusza i daty, pokazuje pomiar, estymaty, MAE i pochodzenie. Dla próby Lab 3 pokazuje osobno prognozę IOŚ-PIB. |
-| Błąd | Niepełny zapis nie dostaje statusu ukończonego. Błędny identyfikator lub brak pliku wyświetla komunikat i nie daje częściowej prezentacji. |
+| `day` | Obiekt dnia według [słownika Lab 3](../data-dictionary.md#wynik-lab-3) albo `null`, gdy dzień jest niedostępny. |
+| `day.date` | Data lokalna `YYYY-MM-DD`. |
+| `day.pm10_daily_mean` | Dobowa wartość w µg/m³ albo `null`. |
+| `day.weather` | Lista godzin. Każda ma `timestamp` z offsetem, `temperature_2m` w °C, `precipitation` w mm za poprzednią godzinę, `wind_speed_10m` w km/h. Wartości liczbowe są skończone. Brak pola pomiarowego ma wartość `null`. |
+| `day.missing_weather_hours` | Liczba godzin doby pomniejszona o godziny z kompletem trzech wartości. Doba może mieć 23, 24 albo 25 godzin. |
+| `origin` | `network`, `cache` albo `null`, zgodnie z pochodzeniem zwróconego dnia. |
+| `retrieved_at_utc` | Dwa czasy pobrania ISO 8601 UTC pod kluczami `ios_pib_pm10` i `open_meteo`, albo `null`, gdy wynik nie zawiera dnia. |
+| `issue` | Kod problemu albo `null`. |
 
-Modele PM10 wspierają R4. Planowana rekomendacja godzinowa R5 wymaga odrębnego kontraktu i walidacji etykiet.
+Moduł sortuje godziny według chwili UTC. Jesienią powtórzona lokalna godzina ma dwa offsety. Zero opadów jest poprawną wartością.
+
+| Sytuacja | Zachowanie |
+|---|---|
+| Błędna data | `INVALID_DATE`. Brak żądań i odczytu cache. |
+| Poprawne pobranie, ale brak wybranej daty | `DATE_NOT_AVAILABLE`. Ekran pokazuje komunikat o braku prognozy dla dnia. |
+| Błąd sieci, limit źródła lub niepoprawna odpowiedź | `FETCH_FAILED` albo `INVALID_SOURCE_DATA`. Jeżeli SQLite zawiera żądany dzień, dołącz go z `origin=cache`. Ponowienie odbywa się przyciskiem. Gdy źródło zwróci 429 z `Retry-After`, poczekaj wskazany czas przed ponowieniem. |
+| Błąd lokalnego zapisu | `CACHE_WRITE_FAILED`. Poprzedni zestaw pozostaje w bazie. Jeśli nadeszły poprawne dane dla dnia, ekran nadal może je wyświetlić z `origin=network` i informacją o błędzie zapisu. |
+
+Przykład na [próbce Lab 3](../../data/processed/sample-clean.json) dla `2026-11-12` daje `pm10_daily_mean=31.59`, `missing_weather_hours=0` i 24 godziny. Pierwsza godzina `2026-11-12T00:00+01:00` ma temperaturę 4,5 °C, opad 0 mm i wiatr 9,7 km/h.
