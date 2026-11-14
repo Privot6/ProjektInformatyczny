@@ -1,9 +1,0 @@
-flowchart LR
-    I["IOŚ-PIB: dobowa prognoza PM10"] --> L3["Lab 3: lokalna data i godziny pogody"]
-    O["Open-Meteo: temperatura, wiatr, opady"] --> L3
-    G["GIOŚ: archiwum godzinowych pomiarów PM10"] --> V["Walidacja i agregacja do pełnych dób"]
-    O -->|"archiwalny zakres"| V
-    V --> A["Ridge i drzewo: chronologiczny trening i test"]
-    L3 -->|"pełne dni prognozy"| A
-    A --> R["Wyniki MAE, obserwacje i próba Lab 3"]
-    R --> S["Planowany RunStore i dashboard"]

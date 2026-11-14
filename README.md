@@ -104,3 +104,7 @@ Możesz też uruchomić `scripts/compare_methods.py` przyciskiem **Run** w PyCha
 Wyniki obejmują [porównanie MAE](./results/lab4/comparison.csv), [19 ocenianych dni](./results/lab4/observations.csv), [próbę zastosowania na Lab 3](./results/lab4/lab3_application.csv) oraz [parametry i dane pominięte](./results/lab4/run.json). Próba wrażliwości jest w [osobnym katalogu](./results/lab4/sensitivity/comparison.csv). Polecenie odtworzenia porównuje osiem plików bajtowo w tym samym środowisku. Aby zapisać nowe wykonanie obok wyników wzorcowych, użyj `.\.venv\Scripts\python.exe scripts/compare_methods.py --output results/lab4_reproduced`.
 
 [Protokół, literatura, kontrola ręczna i wnioski](./docs/experiment.md).
+
+## AeroRun — Laboratorium 5
+
+[Projekt techniczny](./docs/architecture.md) opisuje aplikację mobilną w React Native. Po naciśnięciu **Sprawdź** aplikacja pobiera dane z publicznych API, sprawdza je i wyświetla warunki dla wskazanego dnia. Lokalna baza SQLite zachowuje ostatni poprawnie pobrany zestaw. [Zadania implementacyjne](./docs/issues/lab5-implementation.md) określają zakres prac i kryteria odbioru.
