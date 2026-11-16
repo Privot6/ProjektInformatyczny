@@ -8,6 +8,44 @@
 
 ---
 
+## LAB6 — uruchomienie aplikacji Android
+
+Potrzebne są Python 3.11–3.13 z SQLite ≥3.37, Node.js 22, Android Studio z Android SDK 35, narzędziami platform-tools, JDK 17 lub zgodnym JBR oraz działającym emulatorem. Gradle pobiera zależności podczas pierwszego budowania. Aplikacja używa jednego lokalnego backendu FastAPI. Klucze API nie są potrzebne.
+
+W PowerShell, z katalogu głównego projektu:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements-lab6.txt
+# Ustawienie lokalnego MVP: pomija sprawdzanie certyfikatu hosta prognoz PM10.
+$env:AERORUN_PM10_UNVERIFIED_TLS="1"
+.\.venv\Scripts\python -m uvicorn backend.main:app --host 127.0.0.1 --port 8765
+```
+
+W Android Studio uruchom urządzenie z Device Manager. Projekt natywny znajduje się w `mobile/android`. W drugim terminalu:
+
+```powershell
+cd mobile
+$env:ANDROID_HOME="$env:LOCALAPPDATA\Android\Sdk"
+$env:JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"
+$env:EXPO_PUBLIC_API_URL="http://10.0.2.2:8765"
+npm.cmd ci
+npm.cmd run android
+```
+
+Na fizycznym telefonie z debugowaniem USB wykonaj `adb reverse tcp:8765 tcp:8765` i `adb reverse tcp:8081 tcp:8081`, ustaw `EXPO_PUBLIC_API_URL=http://127.0.0.1:8765` i uruchom ponownie Metro. Przy uruchamianiu z przycisku Run w Android Studio uruchom Metro przez `npm.cmd start` w katalogu mobile z tą samą konfiguracją. Domyślny adres bez zmiennej to `http://10.0.2.2:8000`. Zmienna `AERORUN_DB` pozwala wskazać istniejący plik SQLite.
+
+Wybierz DZISIAJ lub JUTRO i naciśnij SPRAWDŹ. Karta godziny pokazuje score i zalecenie. Dotknięcie rozwija lub zwija prognozowaną średnią dobową PM10 oraz godzinową temperaturę, wiatr i opady. Zielony oznacza TRENUJ, żółty OGRANICZ, czerwony NIE TRENUJ, a szary brak danych. FastAPI uwzględnia dobową prognozę PM10, temperaturę, wiatr i opad. Łączy estymację Ridge (35%) z rozmytą oceną temperatury (25%), wiatru (25%) i opadów (15%). Lokalnie odpowiedź można sprawdzić w [FastAPI Swagger UI](http://127.0.0.1:8765/docs).
+
+Pełny zestaw testów obejmuje wcześniejsze laboratoria. Z katalogu głównego:
+
+```powershell
+.\.venv\Scripts\python -m pip install -r requirements.txt
+.\.venv\Scripts\python -m unittest discover -v -s tests
+```
+
+[Model, integracja, wyniki i odbiór LAB6](docs/implementation.md) · [Postęp prac](IMPLEMENTATION_PROGRESS.md)
+
 ## Opis problemu
 
 Osoby trenujące na zewnątrz w Rzeszowie muszą sprawdzać prognozę jakości powietrza i prognozę pogody w osobnych serwisach. Utrudnia to wybór dnia i godziny treningu z uwzględnieniem stężenia PM10, temperatury, opadów i wiatru.
