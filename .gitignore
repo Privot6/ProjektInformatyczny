@@ -2,3 +2,10 @@
 __pycache__/
 *.py[cod]
 .streamlit/secrets.toml
+
+.env
+.env.local
+node_modules/
+.expo/
+mobile/dist/
+aerorun.sqlite3*

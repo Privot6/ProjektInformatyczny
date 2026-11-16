@@ -1,5 +1,7 @@
 # Architektura AeroRun — Lab 5
 
+W LAB6 pobieranie danych, Ridge i SQLite działają w FastAPI, a React Native wywołuje backend po naciśnięciu SPRAWDŹ. Poniżej zachowano projekt LAB5. [Architektura zaimplementowanego MVP](implementation.md)
+
 ## Granice i odpowiedzialności
 
 AeroRun to aplikacja mobilna React Native (TypeScript) dla osób planujących trening w Rzeszowie. Po naciśnięciu **Sprawdź** telefon pobiera dobową prognozę PM10 z IOŚ-PIB, publikowaną także przez GIOŚ, oraz godzinową temperaturę, opady i wiatr z Open-Meteo. React Native łączy się bezpośrednio z publicznymi API przez HTTPS. SQLite działa lokalnie na telefonie i przechowuje ostatni poprawnie pobrany zestaw.
