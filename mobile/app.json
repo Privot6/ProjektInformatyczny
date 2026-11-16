@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "AeroRun",
+    "slug": "aerorun",
+    "version": "1.0.0",
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "pl.aerorun.mobile"
+    },
+    "plugins": [
+      "expo-asset"
+    ]
+  }
+}
