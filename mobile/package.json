@@ -1,0 +1,17 @@
+{
+  "name": "aerorun-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "prebuild": "expo prebuild --platform android"
+  },
+  "dependencies": {
+    "expo": "~52.0.49",
+    "expo-asset": "~11.0.5",
+    "react": "18.3.1",
+    "react-native": "0.76.9"
+  }
+}
