@@ -1,0 +1,25 @@
+case_id,description,pm10_daily_mean,predicted_pm10,temperature_2m,wind_speed_10m,precipitation,reference_score,reference_source
+S01,Warunki komfortowe,15,15,15,5,0,95,synthetic_assumption
+S02,Dobra pogoda i umiarkowane PM10,45,45,18,8,0,85,synthetic_assumption
+S03,Mróz,20,20,-5,5,0,70,synthetic_assumption
+S04,Chłód,20,20,0,5,0,80,synthetic_assumption
+S05,Chłodny poranek,20,20,3,5,0,88,synthetic_assumption
+S06,Upał,20,20,35,5,0,70,synthetic_assumption
+S07,Gorąco,20,20,30,5,0,80,synthetic_assumption
+S08,Dość ciepło,20,20,32,5,0,75,synthetic_assumption
+S09,Wiatr pośredni,20,20,15,15,0,87,synthetic_assumption
+S10,Wiatr na progu bazy,20,20,15,20,0,80,synthetic_assumption
+S11,Wiatr ponad progiem,20,20,15,21,0,80,synthetic_assumption
+S12,Silny wiatr,20,20,15,30,0,70,synthetic_assumption
+S13,Lekki opad,20,20,15,5,1,90,synthetic_assumption
+S14,Umiarkowany opad,20,20,15,5,2,85,synthetic_assumption
+S15,Wyraźny opad,20,20,15,5,3,80,synthetic_assumption
+S16,Opad uruchamia ograniczenie,20,20,15,5,4,35,synthetic_assumption
+S17,PM10 uruchamia ograniczenie,112.5,90,15,5,0,35,synthetic_assumption
+S18,Kilka utrudnień jednocześnie,45,55,0,20,2,55,synthetic_assumption
+S19,Kilka trudnych warunków,70,80,-3,25,3,35,synthetic_assumption
+S20,Łagodne utrudnienia,30,35,28,12,0.5,82,synthetic_assumption
+S21,Tuż przed ograniczeniem opadu,20,20,15,5,3.9,78,synthetic_assumption
+S22,Tuż przed ograniczeniem PM10,112.4,90,15,5,0,70,synthetic_assumption
+S23,Tuż poniżej progu temperatury,20,20,-0.1,5,0,80,synthetic_assumption
+S24,Tuż powyżej progu temperatury,20,20,30.1,5,0,80,synthetic_assumption
