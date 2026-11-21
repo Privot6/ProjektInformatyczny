@@ -9,3 +9,7 @@ node_modules/
 .expo/
 mobile/dist/
 aerorun.sqlite3*
+.venv-lab7/
+.lab7-tools/
+.lab7-python/
+.lab7-cache/

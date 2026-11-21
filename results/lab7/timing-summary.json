@@ -1,0 +1,14 @@
+{
+  "python": "3.13.2",
+  "system": "Windows",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+  "warmup": 1,
+  "repeats": 5,
+  "hours": 24,
+  "scope": "check: replay HTTP, read, validation, predict, score, SQLite write; no real network or model training",
+  "criterion_seconds_median_below": 2,
+  "median_seconds": 0.010290000005625188,
+  "min_seconds": 0.009466600022278726,
+  "max_seconds": 0.010858000023290515
+}

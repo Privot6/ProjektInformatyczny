@@ -1,5 +1,18 @@
 # Architektura AeroRun — Lab 5
 
+## Aktualny stan Lab 6–7
+
+Rzeczywista ścieżka to **React Native → FastAPI → IOŚ-PIB/Open-Meteo**,
+z bazą SQLite przy backendzie. Telefon nie pobiera bezpośrednio danych źródeł
+i nie przechowuje tej bazy lokalnie. Backend obsługuje tylko today/tomorrow,
+ustala daty w Europe/Warsaw, pobiera źródła równolegle i uruchamia Ridge.
+Trening modelu odbywa się raz przy starcie. Cache jest rozdzielony według daty
+i źródła, zapis jest transakcyjny. [Implementacja](implementation.md).
+
+Poniższe sekcje i diagramy zachowują **historyczny projekt Lab 5**; nie są
+opisem aktualnego rozmieszczenia modułów. [Ocena aktualnej wersji](tests.md)
+i [ograniczenia ekranu](issues/lab7-review.md) określają zakres odbioru Lab 7.
+
 W LAB6 pobieranie danych, Ridge i SQLite działają w FastAPI, a React Native wywołuje backend po naciśnięciu SPRAWDŹ. Poniżej zachowano projekt LAB5. [Architektura zaimplementowanego MVP](implementation.md)
 
 ## Granice i odpowiedzialności

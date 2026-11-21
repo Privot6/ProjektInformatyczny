@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-13",
+  "n": 24,
+  "mae_ug_m3": 6.809396934207708,
+  "daily_forecast_mae_ug_m3": 22.78666666666667,
+  "target": "station 16344 PM10 at t+1h",
+  "training": {
+    "train_hours": 28,
+    "test_hours": 24,
+    "mae_ug_m3": 6.809396934207708,
+    "daily_forecast_mae": 22.786666666666672
+  },
+  "limitation": "Single archived forecast; no independent labels of training suitability. Daily Lab4 MAE has a different target and period."
+}

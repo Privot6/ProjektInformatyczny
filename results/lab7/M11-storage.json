@@ -1,0 +1,446 @@
+{
+  "before": [
+    {
+      "timestamp_utc": 1794438000,
+      "local_date": "2026-11-12",
+      "temperature_2m": null,
+      "precipitation": 0.0,
+      "wind_speed_10m": 9.7,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794441600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.5,
+      "precipitation": 0.0,
+      "wind_speed_10m": 7.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794445200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.4,
+      "precipitation": 0.0,
+      "wind_speed_10m": 6.5,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794448800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.4,
+      "precipitation": 0.0,
+      "wind_speed_10m": 7.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794452400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.6,
+      "precipitation": 0.0,
+      "wind_speed_10m": 8.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794456000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.7,
+      "precipitation": 0.0,
+      "wind_speed_10m": 10.4,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794459600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 5.3,
+      "precipitation": 0.0,
+      "wind_speed_10m": 11.2,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794463200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 5.8,
+      "precipitation": 0.3,
+      "wind_speed_10m": 10.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794466800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.2,
+      "precipitation": 0.5,
+      "wind_speed_10m": 9.7,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794470400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.4,
+      "precipitation": 0.5,
+      "wind_speed_10m": 13.3,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794474000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.7,
+      "precipitation": 0.0,
+      "wind_speed_10m": 16.2,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794477600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 7.0,
+      "precipitation": 0.2,
+      "wind_speed_10m": 14.4,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794481200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 7.7,
+      "precipitation": 0.0,
+      "wind_speed_10m": 14.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794484800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 9.4,
+      "precipitation": 0.0,
+      "wind_speed_10m": 16.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794488400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 9.9,
+      "precipitation": 0.0,
+      "wind_speed_10m": 16.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794492000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 9.6,
+      "precipitation": 0.0,
+      "wind_speed_10m": 14.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794495600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 8.9,
+      "precipitation": 0.0,
+      "wind_speed_10m": 13.7,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794499200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 8.3,
+      "precipitation": 0.0,
+      "wind_speed_10m": 12.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794502800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 7.2,
+      "precipitation": 0.0,
+      "wind_speed_10m": 13.0,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794506400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.5,
+      "precipitation": 0.0,
+      "wind_speed_10m": 11.5,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794510000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.2,
+      "precipitation": 0.0,
+      "wind_speed_10m": 10.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794513600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.3,
+      "precipitation": 0.0,
+      "wind_speed_10m": 11.2,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794517200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.5,
+      "precipitation": 0.0,
+      "wind_speed_10m": 9.4,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794520800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.9,
+      "precipitation": 0.0,
+      "wind_speed_10m": 8.3,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    }
+  ],
+  "after": [
+    {
+      "timestamp_utc": 1794438000,
+      "local_date": "2026-11-12",
+      "temperature_2m": null,
+      "precipitation": 0.0,
+      "wind_speed_10m": 9.7,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794441600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.5,
+      "precipitation": 0.0,
+      "wind_speed_10m": 7.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794445200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.4,
+      "precipitation": 0.0,
+      "wind_speed_10m": 6.5,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794448800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.4,
+      "precipitation": 0.0,
+      "wind_speed_10m": 7.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794452400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.6,
+      "precipitation": 0.0,
+      "wind_speed_10m": 8.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794456000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 4.7,
+      "precipitation": 0.0,
+      "wind_speed_10m": 10.4,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794459600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 5.3,
+      "precipitation": 0.0,
+      "wind_speed_10m": 11.2,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794463200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 5.8,
+      "precipitation": 0.3,
+      "wind_speed_10m": 10.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794466800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.2,
+      "precipitation": 0.5,
+      "wind_speed_10m": 9.7,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794470400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.4,
+      "precipitation": 0.5,
+      "wind_speed_10m": 13.3,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794474000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.7,
+      "precipitation": 0.0,
+      "wind_speed_10m": 16.2,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794477600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 7.0,
+      "precipitation": 0.2,
+      "wind_speed_10m": 14.4,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794481200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 7.7,
+      "precipitation": 0.0,
+      "wind_speed_10m": 14.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794484800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 9.4,
+      "precipitation": 0.0,
+      "wind_speed_10m": 16.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794488400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 9.9,
+      "precipitation": 0.0,
+      "wind_speed_10m": 16.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794492000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 9.6,
+      "precipitation": 0.0,
+      "wind_speed_10m": 14.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794495600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 8.9,
+      "precipitation": 0.0,
+      "wind_speed_10m": 13.7,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794499200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 8.3,
+      "precipitation": 0.0,
+      "wind_speed_10m": 12.6,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794502800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 7.2,
+      "precipitation": 0.0,
+      "wind_speed_10m": 13.0,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794506400,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.5,
+      "precipitation": 0.0,
+      "wind_speed_10m": 11.5,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794510000,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.2,
+      "precipitation": 0.0,
+      "wind_speed_10m": 10.8,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794513600,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.3,
+      "precipitation": 0.0,
+      "wind_speed_10m": 11.2,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794517200,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.5,
+      "precipitation": 0.0,
+      "wind_speed_10m": 9.4,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    },
+    {
+      "timestamp_utc": 1794520800,
+      "local_date": "2026-11-12",
+      "temperature_2m": 6.9,
+      "precipitation": 0.0,
+      "wind_speed_10m": 8.3,
+      "pm10": null,
+      "pm10_daily_mean": 31.59
+    }
+  ],
+  "captures_before": {
+    "ios_pib_pm10": "2026-11-21T17:44:39+00:00",
+    "open_meteo": "2026-11-21T17:44:39+00:00"
+  },
+  "captures_after": {
+    "ios_pib_pm10": "2026-11-21T17:44:39+00:00",
+    "open_meteo": "2026-11-21T17:44:39+00:00"
+  }
+}

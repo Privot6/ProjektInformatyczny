@@ -1,0 +1,30 @@
+{
+  "scenario": "sensitivity",
+  "data_sha256": "7b5eb1234a3f659143d5111f2443a09711c838f963062fbcb7373b0bb9ed7a1b",
+  "application_model_sha256": "f0e3f2a4a0b0a85e3a22ace70a1fec0c85e81ee2e502d39b22a02efaea59fb45",
+  "script_sha256": "ffb083d9a2b305c65f632506b6706ca721167814c3bd65a553f7e6c78729ebda",
+  "reference_sources": [
+    "synthetic_assumption"
+  ],
+  "reference_note": "Pochodzenie deklarowane w CSV; domyślna próbka jest oceną ekspertów.",
+  "scope": "Tylko punktacja; wspólne założone PM10, bez treningu i oceny Ridge.",
+  "baseline": {
+    "temperature_range_c": [
+      0,
+      30
+    ],
+    "wind_max_kmh": 15,
+    "rain_below_mm": 2,
+    "weights": [
+      0.35,
+      0.25,
+      0.25,
+      0.15
+    ]
+  },
+  "application": "backend.model.training_score (bez zmian)",
+  "metric": "MAE w punktach oceny 0–100",
+  "application_improvement_points": 4.75,
+  "practical_threshold_points": 2.0,
+  "lower_mae": "application"
+}

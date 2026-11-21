@@ -1,0 +1,1 @@
+{"detail":[{"type":"literal_error","loc":["path","day"],"msg":"Input should be 'today' or 'tomorrow'","input":"invalid","ctx":{"expected":"'today' or 'tomorrow'"}}]}

@@ -1,0 +1,90 @@
+LAB7 — zapis operatora na podstawie rzeczywistych odczytów
+Operator: agent Codex; data 2026-11-21; strefa Europe/Warsaw (UTC+01:00).
+Nie jest to log automatycznego runnera. Oceny nadano po odczytaniu wyników.
+Baza: bd22946619a49ec0738e123c7222c40f6fc5305e, galaz lab7.
+Srodowisko: Windows 11 build 26200, Python 3.12.16, SQLite 3.53.1,
+scikit-learn 1.7.2. Pelne zaleznosci: requirements-lab7-lock.txt.
+Czasy indywidualnych przypadkow nie byly mierzone.
+
+18:44 M01/M02 PASS
+prepare_forecast --source inputs/sample.json --output prepared.json
+Exit 0; 8 dat, 3 wartosci PM10, 168 godzin.
+12.11: 24 godziny, PM10 31.59, missing_weather_hours 0.
+Pierwszy znacznik: 2026-11-12T00:00+01:00, temperatura 4.5, opad 0, wiatr 9.7.
+Jednostki: PM10 ug/m3, temperatura stopnie C, opad mm, wiatr km/h.
+
+18:44 M03 PASS
+prepare_forecast --source inputs/duplicate.json --output protected-result.txt
+Exit 1: Powtorzony timestamp Open-Meteo po konwersji: 2026-11-11T01:00+01:00
+Po bledzie protected-result.txt nadal zawiera WYNIK KONTROLNY.
+
+18:44 i 18:48 M04 PASS
+inputs/empty.json: Exit 1, Blad danych Lab 3: 'metadata'; empty-result.json nie istnieje.
+inputs/negative.json: Exit 1, Niepoprawna wartosc pola pm10_daily_mean: -1;
+negative-result.json nie istnieje.
+inputs/no-data.json: Exit 1, Brak wspolnej daty PM10 i prognozy pogody;
+no-data-result.json nie istnieje.
+
+18:44 M05/M06/M07 PASS
+training_score(S04, 20) -> 81.
+classify(39),classify(40),classify(69),classify(70) ->
+ZOSTAN W DOMU, OGRANICZ, OGRANICZ, TRENUJ.
+Weto przy PM10 dobowym 112.5 -> 39; przy opadzie 4 -> 39.
+Doby 29.03.2026 i 25.10.2026 -> 23 i 25 godzin.
+
+18:44:18 M08 PASS
+show('2026-11-12','M08'): 24 godziny, PM10 31.59, warnings [].
+Best 2026-11-12T22:00+01:00, score 97, TRENUJ.
+SQLite odczytano 24 rekordy. Odtworzone HTTP obu zrodel, bez internetu.
+
+18:44:39 M09 PASS
+mode='offline'; show 12.11 -> oba origin cache, dwa ostrzezenia.
+Best nadal 22:00, 97 pkt. Dzien 26.10 bez cache -> HTTPException 503:
+Zrodla sa niedostepne. Brak zapisu dla tego dnia.
+
+18:44:39 M10 PASS
+14.11: PM10 null, best null, 24 godziny z null score.
+Po temperature_2m[23]=None: 12.11 00:00 ma temperature null, score null,
+message null; precipitation 0 pozostalo 0. Inne godziny nadal ocenione.
+
+18:44:39 M11 PASS
+Trigger INSERT RAISE(ABORT) w osobnej bazie.
+Wynik w pamieci: best 97, temperatura pierwszej godziny 4.5,
+warnings: Nie udalo sie zapisac wyniku w SQLite.
+Odczyt przed/po: po 24 rekordy; pierwsza temperatura nadal null.
+Rekordy i metadane obejrzano w M11-storage.json; zachowano poprzedni zapis.
+
+18:46:56 M12 PASS
+Prawdziwy lokalny Uvicorn, GET /forecast/invalid.
+HTTP 422, literal_error, Input should be 'today' or 'tomorrow'.
+Pierwsza proba lokalnego polaczenia z sandboxa byla zablokowana;
+powtorzono po uruchomieniu z dostepem do lokalnych gniazd.
+
+18:45 M13 PASS
+Scoring: n=24, MAE application 1.9583333333333333, threshold 6.875;
+sensitivity threshold 6.708333333333333.
+Sumy bledow 47,165,161; podzielone przez 24 daja powyzsze MAE.
+
+18:45 M16 FAIL przed poprawka, PASS po poprawce
+Przed: CSV synthetic_assumption; komunikat przypisywal oceny ekspertom
+i dowodzil przewagi w rzeczywistym uzyciu. Dowod scoring-before/run.json.
+Po: opis syntetycznych zalozen i ograniczenia do probki w konsoli/run.json.
+MAE bez zmian. Dowod scoring/run.json; zmiany w roboczym diffie Lab7.
+
+M14 NOT RUN — brak dzialajacego emulatora/adb na stanowisku.
+M15 NOT RUN — brak wyniku od innej osoby zespolu.
+Nie uruchamiano unittest, pytest, automatyzacji UI ani CI.
+
+Pomiar czasu 18:45:02: 1 rozgrzewka + 5 powtorzen, 24 godziny.
+Sekundy: 0.010271599981933832, 0.010040600085631013,
+0.010923200054094195, 0.00953539996407926, 0.010421899962238967.
+Mediana 0.010271599981933832 < 2: kryterium spelnione lokalnie.
+Bez realnego internetu, treningu modelu i renderowania telefonu.
+
+Jakosc calego przeplywu, 13.11: 24 ocenione godziny, 28 godzin uczacych.
+MAE Ridge 6.809396934207708 ug/m3; sama prognoza dobowa 22.78666666666667.
+Pierwszy przypadek: pomiar 7.9, estymacja 17.388586892213404,
+blad 9.488586892213403; score aplikacji 95.
+Lab4 dobowe odtworzono: Ridge 10.077318055482243, tree 13.134538847117794.
+Inny cel i okres niz Lab6/7 — brak podstaw do wniosku o poprawie na podstawie
+samej roznicy MAE miedzy tymi eksperymentami.

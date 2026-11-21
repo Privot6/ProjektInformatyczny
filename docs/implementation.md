@@ -1,5 +1,17 @@
 # LAB6 — integracja AeroRun
 
+## Aktualizacja Lab 7
+
+[Plan i rzeczywiste wyniki manualne](tests.md), [procedury](manual-testing.md)
+i [instrukcja użytkownika](user-guide.md) opisują aktualną ocenę. Konsola
+`scripts/manual_lab7.py` odtwarza HTTP na kopii publicznej próbki i osobnej bazie;
+nie jest trybem produkcyjnej aplikacji. Model, punktacja i zapis pozostają
+kodem backendu. Dodatkowe skrypty zbierają pomiar czasu i jakości, bez asercji.
+Środowisko Lab 7 jest odtwarzalne przez `requirements-lab7-lock.txt`.
+
+Wykonano 14 z 16 przypadków manualnych (M16 miał FAIL, następnie PASS po
+poprawieniu opisu pochodzenia ocen). 
+
 ## Główny przepływ
 
 Ekran dla Rzeszowa wysyła jedno żądanie GET do FastAPI po naciśnięciu SPRAWDŹ. Serwer przyjmuje wyłącznie /forecast/today i /forecast/tomorrow. Datę ustala według Europe/Warsaw. Dla obu dni pobiera równolegle prognozowane średnie dobowe PM10 z API IOŚ-PIB dla Rzeszowa (TERYT 1863) oraz trzy godzinowe pola Open-Meteo. Z odpowiedzi PM10 wybiera wyłącznie datę lokalną wskazanego dnia. [Opis API GIOŚ](https://powietrze.gios.gov.pl/pjp/content/api)

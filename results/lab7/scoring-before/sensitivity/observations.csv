@@ -1,0 +1,25 @@
+case_id,description,pm10_daily_mean,predicted_pm10,temperature_2m,wind_speed_10m,precipitation,reference_score,reference_source,threshold_score,threshold_absolute_error_points,application_score,application_absolute_error_points
+S01,Warunki komfortowe,15.0,15.0,15.0,5.0,0.0,95.0,synthetic_assumption,95,0.0,95,0.0
+S02,Dobra pogoda i umiarkowane PM10,45.0,45.0,18.0,8.0,0.0,85.0,synthetic_assumption,86,1.0,86,1.0
+S03,Mróz,20.0,20.0,-5.0,5.0,0.0,70.0,synthetic_assumption,69,1.0,69,1.0
+S04,Chłód,20.0,20.0,0.0,5.0,0.0,80.0,synthetic_assumption,94,14.0,81,1.0
+S05,Chłodny poranek,20.0,20.0,3.0,5.0,0.0,88.0,synthetic_assumption,94,6.0,89,1.0
+S06,Upał,20.0,20.0,35.0,5.0,0.0,70.0,synthetic_assumption,69,1.0,69,1.0
+S07,Gorąco,20.0,20.0,30.0,5.0,0.0,80.0,synthetic_assumption,94,14.0,81,1.0
+S08,Dość ciepło,20.0,20.0,32.0,5.0,0.0,75.0,synthetic_assumption,69,6.0,76,1.0
+S09,Wiatr pośredni,20.0,20.0,15.0,15.0,0.0,87.0,synthetic_assumption,94,7.0,88,1.0
+S10,Wiatr na progu bazy,20.0,20.0,15.0,20.0,0.0,80.0,synthetic_assumption,69,11.0,81,1.0
+S11,Wiatr ponad progiem,20.0,20.0,15.0,21.0,0.0,80.0,synthetic_assumption,69,11.0,80,0.0
+S12,Silny wiatr,20.0,20.0,15.0,30.0,0.0,70.0,synthetic_assumption,69,1.0,69,1.0
+S13,Lekki opad,20.0,20.0,15.0,5.0,1.0,90.0,synthetic_assumption,94,4.0,90,0.0
+S14,Umiarkowany opad,20.0,20.0,15.0,5.0,2.0,85.0,synthetic_assumption,79,6.0,86,1.0
+S15,Wyraźny opad,20.0,20.0,15.0,5.0,3.0,80.0,synthetic_assumption,79,1.0,83,3.0
+S16,Opad uruchamia ograniczenie,20.0,20.0,15.0,5.0,4.0,35.0,synthetic_assumption,39,4.0,39,4.0
+S17,PM10 uruchamia ograniczenie,112.5,90.0,15.0,5.0,0.0,35.0,synthetic_assumption,39,4.0,39,4.0
+S18,Kilka utrudnień jednocześnie,45.0,55.0,0.0,20.0,2.0,55.0,synthetic_assumption,43,12.0,50,5.0
+S19,Kilka trudnych warunków,70.0,80.0,-3.0,25.0,3.0,35.0,synthetic_assumption,10,25.0,25,10.0
+S20,Łagodne utrudnienia,30.0,35.0,28.0,12.0,0.5,82.0,synthetic_assumption,89,7.0,77,5.0
+S21,Tuż przed ograniczeniem opadu,20.0,20.0,15.0,5.0,3.9,78.0,synthetic_assumption,79,1.0,79,1.0
+S22,Tuż przed ograniczeniem PM10,112.4,90.0,15.0,5.0,0.0,70.0,synthetic_assumption,72,2.0,72,2.0
+S23,Tuż poniżej progu temperatury,20.0,20.0,-0.1,5.0,0.0,80.0,synthetic_assumption,69,11.0,81,1.0
+S24,Tuż powyżej progu temperatury,20.0,20.0,30.1,5.0,0.0,80.0,synthetic_assumption,69,11.0,81,1.0

@@ -1,5 +1,59 @@
 # AeroRun – Analityczny asystent wyboru okna treningowego na podstawie danych smogowych (GIOŚ) i meteorologicznych (Open-Meteo)
 
+## LAB7 — testowanie manualne i ocena rezultatów
+
+Lab 7 wykonano w wariancie **wyłącznie manualnym**,  Nie dodano ani nie uruchamiano testów automatycznych ani CI.
+Polecenia unittest w dalszych sekcjach opisują wcześniejsze laboratoria.
+
+Z katalogu głównego repozytorium, w PowerShell z zainstalowanym Pythonem 3.12:
+
+```powershell
+python --version  # wymagany Python 3.12; przy wielu instalacjach użyj py -3.12
+python -m venv .venv-lab7
+.\.venv-lab7\Scripts\python.exe -m pip install -r requirements-lab7-lock.txt
+$env:PYTHONUTF8="1"
+.\.venv-lab7\Scripts\python.exe -i scripts/manual_lab7.py
+```
+
+Jeżeli `python` wskazuje inną wersję, zamiast niego użyj `py -3.12` albo pełnej
+ścieżki do Pythona 3.12 przy tworzeniu środowiska. Sprawdzone środowisko to
+Python 3.12.16 / Windows 11; dokładne zależności są w pliku lock. Instalacja
+wymaga internetu. W `.venv-lab7` są zależności backendu i pomiarów Lab 7;
+starszy skrypt `prepare_data.py` wymaga osobno `requirements.txt`.
+
+W konsoli wpisz `result = show('2026-11-12', 'repeat-M08')`, odczytaj zapisany
+JSON i porównaj go z planem. Konsola używa kopii publicznej próbki i tymczasowej
+bazy SQLite, bez zewnętrznych API. Zakończ przez `client.close()`,
+`temporary.cleanup()` i `exit()`.
+
+[Plan, dziennik i statusy wymagań](docs/tests.md) ·
+[Procedury wszystkich przypadków](docs/manual-testing.md) ·
+[Instrukcja użytkownika](docs/user-guide.md) ·
+[Dowody i pomiary](results/lab7/) ·
+[Problem i poprawka](docs/issues/lab7-reference-provenance.md) ·
+[Przegląd i zadania odbioru](docs/issues/lab7-review.md)
+
+Pomiary analityczne, bez uruchamiania testów:
+
+```powershell
+.\.venv-lab7\Scripts\python.exe scripts/measure_lab7.py
+.\.venv-lab7\Scripts\python.exe scripts/quality_lab7.py
+```
+
+Przed ponownym pomiarem zachowaj kopię poprzednich wyników: te dwa polecenia
+zapisują do stałych nazw w `results/lab7/`. Odbiór Androida oraz niezależne
+uruchomienie przez drugą osobę pozostają niewykonane i są jawne w raporcie.
+
+Do uruchomienia zwykłego backendu można użyć tego samego środowiska:
+
+```powershell
+.\.venv-lab7\Scripts\python.exe -m uvicorn backend.main:app --host 127.0.0.1 --port 8765
+```
+
+Android i adres backendu skonfiguruj według sekcji LAB6 poniżej. Tryb manualny
+z archiwalnymi odpowiedziami jest osobną konsolą i nie zmienia dat ani źródeł
+w działającej aplikacji.
+
 ## LAB4 — porównanie metod punktacji treningowej
 
 Eksperyment porównuje używaną w aplikacji punktację ważoną z elementami
