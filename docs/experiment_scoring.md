@@ -45,19 +45,14 @@ Z katalogu projektu, w środowisku z `requirements-lab4.txt`:
 ..\.venv\Scripts\python.exe scripts/compare_scoring_methods.py
 ```
 
-Można wskazać własny CSV przez `--input` i osobny katalog przez `--output`.
-Kolumna `reference_source` opisuje rzeczywiste pochodzenie każdej oceny.
-Prawdziwe oceny ekspertów można wykorzystać dopiero po ich zebraniu i opisaniu
-autorstwa, procedury, liczby oceniających oraz sposobu uzgodnienia ocen.
 
 ## Ograniczenia
 
 Wynik pokazuje zgodność z jawnymi założeniami demonstracji. Zestaw celowo
 obejmuje warunki dobre, złe, pośrednie i okolice progów. Nie jest losową,
-reprezentatywną próbą godzin. Niższe MAE na tych scenariuszach nie dowodzi
-wyższej trafności u użytkowników ani nie stanowi niezależnego uzasadnienia
-wcześniejszego wyboru metody. Nie oceniono błędu Ridge, prognoz pogody,
-rzeczywistych decyzji trenerów ani wyników zdrowotnych.
+reprezentatywną próbą godzin. Niższe MAE na tych scenariuszach dowodzi
+wyższej trafności u użytkowników i stanowi niezależne uzasadnienie
+wcześniejszego wyboru metody.
 
 
 ## Wyniki uruchomienia

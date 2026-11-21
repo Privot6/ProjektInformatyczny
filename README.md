@@ -1,5 +1,26 @@
 # AeroRun – Analityczny asystent wyboru okna treningowego na podstawie danych smogowych (GIOŚ) i meteorologicznych (Open-Meteo)
 
+## LAB4 — porównanie metod punktacji treningowej
+
+Eksperyment porównuje używaną w aplikacji punktację ważoną z elementami
+rozmytymi z prostą bazą progową.
+
+W aktywnym środowisku Pythona z katalogu projektu:
+
+```powershell
+python -m pip install -r requirements-lab4.txt
+python scripts/compare_scoring_methods.py
+python -m unittest discover -s tests -p test_scoring_comparison.py -v
+```
+
+Wejście: `data/processed/lab4_scoring_scenarios.csv` (24 syntetyczne scenariusze
+i założone oceny wzorcowe, bez ocen ekspertów). Oba warianty dostają to samo
+założone PM10; skrypt nie trenuje Ridge. MAE jest liczone w punktach 0–100.
+Wyniki: `results/lab4/scoring/` oraz `results/lab4/scoring/sensitivity/`.
+Parametry są opisane w planie i `run.json`; próba wrażliwości zmienia próg
+wiatru bazy z 20 na 15 km/h. Własny CSV i katalog wynikowy można wskazać przez
+`--input` i `--output`.
+
 **Specjalność:** Analiza Danych Społeczno-gospodarczych
 
 **Zespół:** Dawid Jopek, Kornel Łazowski, Maksym Łazowski, Kacper Dąbek 
